@@ -26,4 +26,12 @@ public class RotationTarget : MonoBehaviour
             return instance.transform.position;
         }
     }
+
+    public static Transform Transform
+    {
+        get
+        {
+            return instance.transform;
+        }
+    }
 }
