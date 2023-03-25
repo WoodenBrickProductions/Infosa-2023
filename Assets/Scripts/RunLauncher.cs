@@ -9,4 +9,10 @@ public class RunLauncher : MonoBehaviour
         RunManager.Instance.StartRun(_runData);
         GameState.Instance.RequestState(GameState.Type.InGame);
     }
+
+    public void StopRun()
+    {
+        RunManager.Instance.EndRun();
+        GameState.Instance.RequestState(GameState.Type.Menu);
+    }
 }

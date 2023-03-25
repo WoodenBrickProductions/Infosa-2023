@@ -21,6 +21,6 @@ public class LevelBase : MonoBehaviour
 
     public void EnableExitInteractable()
     {
-        
+        _levelExitInteractable.EnableInteraction();
     }
 }

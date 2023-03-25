@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class RunManager : MonoBehaviour
 {
     [SerializeField] private GameObject _playerObject;
+    [SerializeField] private GameObject _playerPrefab;
 
     [SerializeField] private LevelsSO _levels;
     [SerializeField] private UnityEvent _onRunStart;
@@ -39,15 +40,10 @@ public class RunManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // TODO: remove later
-    private void Start()
-    {
-        
-    }
-
     public void StartRun(RunSO runData)
     {
         _runData = runData;
+        _playerObject = Instantiate(_playerPrefab, null);
         
         // TODO: add player interactable
         _roomCounter = 0;
@@ -81,7 +77,7 @@ public class RunManager : MonoBehaviour
     public void EndRun()
     {
         // TODO: destroy player
-        
+        Destroy(_playerObject);
         Destroy(_currentLevel.gameObject);
         
         _onRunEnd.Invoke();

@@ -1,10 +1,10 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class Interactable : MonoBehaviour
 {
+    [SerializeField] private UnityEvent _onEnabled;
     [SerializeField] private UnityEvent _onEnter;
     [SerializeField] private UnityEvent _onExit;
     [SerializeField] private UnityEvent _onInteraction;
@@ -18,7 +18,7 @@ public class Interactable : MonoBehaviour
     }
 
     private bool _canInteract = false;
-    
+
     private void OnTriggerEnter(Collider other)
     {
         _canInteract = true;
@@ -45,5 +45,10 @@ public class Interactable : MonoBehaviour
     private void Interact()
     {
         _onInteraction?.Invoke();
+    }
+
+    public void EnableInteraction()
+    {
+        _onEnabled?.Invoke();
     }
 }
