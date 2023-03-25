@@ -103,7 +103,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        _spawner.SendDeath(this);
+        _spawner?.SendDeath(this);
         enabled = false;
         Destroy(gameObject);
     }
