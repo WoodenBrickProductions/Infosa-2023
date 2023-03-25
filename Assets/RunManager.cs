@@ -1,3 +1,4 @@
+using System;
 using Levels;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,20 +13,32 @@ public class RunManager : MonoBehaviour
     [SerializeField] private UnityEvent _onRunEnd;
 
     private GameObject _player;
+    private LevelBase _currentLevel;
+
+    // TODO: remove later
+    private void Start()
+    {
+        StartRun();
+    }
 
     public void StartRun()
     {
-        _player = Instantiate(_playerObject);
+        // TODO: add player interactable
         
-        
-
+        _currentLevel = Instantiate(_levels.GetRandom()).GetComponent<LevelBase>();
+        _currentLevel.Initialize(this);
         _onRunStart?.Invoke();
     }
 
     public void NextRoom()
     {
-        // TODO: instantiate a room, remove last room, set player params
+        LevelBase lastLevel = _currentLevel;
+        _currentLevel = Instantiate(_levels.GetRandom()).GetComponent<LevelBase>();
+        _currentLevel.Initialize(this);
+        Destroy(lastLevel.gameObject);
         
+        // TODO: reset player
+
         _onNextRoom.Invoke();
     }
 

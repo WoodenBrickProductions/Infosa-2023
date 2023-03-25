@@ -36,7 +36,7 @@ public class Interactable : MonoBehaviour
         if (!_canInteract)
             return;
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Interact();
         }

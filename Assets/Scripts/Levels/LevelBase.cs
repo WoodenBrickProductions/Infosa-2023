@@ -13,18 +13,11 @@ public class LevelBase : MonoBehaviour
         _runManager = runManager;
         _levelExitInteractable.OnInteraction.AddListener(_runManager.NextRoom);
     }
-
-    // TODO: remove this later
-    public void Start()
-    {
-        _levelExitInteractable?.OnInteraction.AddListener(_runManager.NextRoom);
-    }
-
-    public void OnDestroy()
+    
+    public void OnDisable()
     {
         _levelExitInteractable.OnInteraction.RemoveListener(_runManager.NextRoom);
     }
-
 
     public void EnableExitInteractable()
     {

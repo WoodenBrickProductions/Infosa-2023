@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0302ac4ef2e4b1790a6f8903f5b1bfe, type: 3}
-  m_Name: LevelsSO
+  m_Script: {fileID: 11500000, guid: f987de1988f94506987ad5b63cb24845, type: 3}
+  m_Name: LimitedRunSO
   m_EditorClassIdentifier: 
-  Levels:
-  - {fileID: 6317493183608575208, guid: 30807be1d3d25467e913625e51dc09be, type: 3}
-  - {fileID: 6597443152670302256, guid: f57a1b3d2881543e7bb74f25402fb55e, type: 3}
+  _runLength: 5
