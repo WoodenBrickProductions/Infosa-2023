@@ -15,13 +15,7 @@ public class MovementTest : MonoBehaviour
 	[Range(0f, 90f)] [SerializeField] float yRotationLimit = 88f;
 	[SerializeField] private bool horizontalLock = false;
 	[Header("Stats")]
-	[SerializeField] float movementSpeed = 10;
-	private float currentMovementSpeed;
-
-	void Awake()
-    {
-		currentMovementSpeed = movementSpeed;
-    }
+	public float currentSpeed;
 
 	Vector2 rotation = Vector2.zero;
 	const string xAxis = "Mouse X"; //Strings in direct code generate garbage, storing and re-using them creates no garbage
@@ -40,7 +34,7 @@ public class MovementTest : MonoBehaviour
 		dir.y = 0;
 		dir = dir.normalized;
 
-		transform.position += dir * movementSpeed * Time.deltaTime;
+		transform.position += dir * currentSpeed * Time.deltaTime;
 
 		rotation.x += Input.GetAxis(xAxis) * sensitivity;
 		

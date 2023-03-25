@@ -152,10 +152,15 @@ public class ShootComponent : MonoBehaviour
         foreach(var collider in colliders)
         {
             var enemy = collider.GetComponent<Enemy>();
-            if (enemy == null)
+            if (enemy != null)
+            {
+                enemy.ApplyEffect(context);
                 continue;
+            }
 
-            enemy.ApplyEffect(context);
+            var player = collider.GetComponent<Player>();
+            if (player != null)
+                player.ApplyEffect(context);
         }
     }
 
