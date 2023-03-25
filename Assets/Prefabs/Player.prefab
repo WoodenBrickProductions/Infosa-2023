@@ -110,6 +110,7 @@ MonoBehaviour:
           m_StringArgument: shoot
           m_BoolArgument: 0
         m_CallState: 2
+  muzzleVisualEffect: {fileID: 1984203039368250888, guid: 9ceb6e5f221cc884bbe7c66d05a0d922, type: 3}
   fireRate: 4
   damage: 1
   randomBulletOrder: 0
@@ -569,7 +570,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6708834033796956914}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.108, y: 0.207, z: 0}
+  m_LocalPosition: {x: -0.14, y: 0.207, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -10,6 +10,8 @@ public class ShootComponent : MonoBehaviour
     [Header("Events")]
     public UnityEvent OnShoot;
 
+    [SerializeField] private VisualEffect muzzleVisualEffect;
+
     [Header("Stats")]
     [SerializeField] private float fireRate = 4;
     [SerializeField] private float damage = 2;
@@ -91,6 +93,8 @@ public class ShootComponent : MonoBehaviour
     public void ShootProjectile()
     {
         pool.ShootBullet(BulletOrigin.Position, RotationTarget.Transform.forward, bulletSpeed, magicBullet == 0, nextEffect);
+
+        var muzzleEffect = Instantiate(muzzleVisualEffect, BulletOrigin.Position, default, null);
 
         OnShoot.Invoke();
     }
