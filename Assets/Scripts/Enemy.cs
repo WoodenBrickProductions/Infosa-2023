@@ -124,6 +124,10 @@ public class Enemy : MonoBehaviour
         var dieEffect = Instantiate(dieVisualEffect, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), default, null);
 
         _spawner?.SendDeath(this);
+        
+        SoundSystem.Instance.PlaySound("fx-enemy-death");
+        SoundSystem.Instance.PlaySound("fx-impact");
+
         enabled = false;
         Destroy(gameObject);
     }

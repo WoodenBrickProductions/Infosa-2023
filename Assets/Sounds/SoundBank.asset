@@ -37,3 +37,14 @@ MonoBehaviour:
     - {fileID: 8300000, guid: bb38642a1f0b64f9a8a6bc6f5b4ee5c6, type: 3}
     - {fileID: 8300000, guid: f1806ad6a1f83453a945cac9a0a77db6, type: 3}
     type: 10
+  - name: fx-enemy-death
+    clips:
+    - {fileID: 8300000, guid: 780b7d46ea4654dd5af7936ba86f37ae, type: 3}
+    - {fileID: 8300000, guid: 04fadc563196549dc80d4c168840d2f8, type: 3}
+    - {fileID: 8300000, guid: 011956ded6a2149cf87d361915d8698c, type: 3}
+    - {fileID: 8300000, guid: c6fe10476754540cf9a6339e2366a6f0, type: 3}
+    type: 10
+  - name: fx-impact
+    clips:
+    - {fileID: 8300000, guid: d8281b2304b0e45488c20e108738f479, type: 3}
+    type: 10
