@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class Enemy : MonoBehaviour
     private Coroutine speedBoost;
     private EffectContext knockbackEffect = new EffectContext();
 
+    public event Action OnHit;
     private EnemySpawner _spawner;
 
     public void SetSpawner(EnemySpawner spawner)
@@ -45,18 +47,22 @@ public class Enemy : MonoBehaviour
 
     void Rotate()
     {
-        var newForward = (RotationTarget.Position - rotationOrigin.transform.position);
-        newForward.y = 0;
-        newForward = newForward.normalized;
+        //var newForward = (RotationTarget.Position - rotationOrigin.transform.position);
+        //newForward.y = 0;
+        //newForward = newForward.normalized;
 
-        if (Mathf.Abs(Vector3.Angle(rotationOrigin.transform.forward, newForward)) > 22.5f)
-        {
-            rotationOrigin.transform.Rotate(new Vector3(0, 45, 0));
-        }
-        else if(Mathf.Abs(Vector3.Angle(rotationOrigin.transform.forward, newForward)) < -22.5f)
-        {
-            rotationOrigin.transform.Rotate(new Vector3(0, -45, 0));
-        }
+        //if (Mathf.Abs(Vector3.Angle(rotationOrigin.transform.forward, newForward)) > 22.5f)
+        //{
+        //    rotationOrigin.transform.Rotate(new Vector3(0, 45, 0));
+        //}
+        //else if(Mathf.Abs(Vector3.Angle(rotationOrigin.transform.forward, newForward)) < -22.5f)
+        //{
+        //    rotationOrigin.transform.Rotate(new Vector3(0, -45, 0));
+        //}
+
+        var dir = RotationTarget.Position - transform.position;
+        dir.y = 0;
+        transform.forward = dir.normalized;
     }
 
     public void TakeDamage(float amount)
@@ -65,7 +71,10 @@ public class Enemy : MonoBehaviour
         if(currentHealth <= 0)
         {
             Die();
+            return;
         }
+
+        OnHit?.Invoke();
 
         if(currentHealth > MaxHealth)
         {
