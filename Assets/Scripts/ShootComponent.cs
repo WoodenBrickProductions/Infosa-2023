@@ -76,7 +76,7 @@ public class ShootComponent : MonoBehaviour
 
     public void Shoot()
     {
-        var ray = new Ray(RotationTarget.Position, RotationTarget.Transform.forward);
+        var ray = new Ray(BulletOrigin.Position, RotationTarget.Transform.forward);
         RaycastHit hit;
         if (!Physics.Raycast(ray, out hit))
             return;
@@ -86,7 +86,7 @@ public class ShootComponent : MonoBehaviour
 
     public void ShootProjectile()
     {
-        pool.ShootBullet(RotationTarget.Position, RotationTarget.Transform.forward, bulletSpeed, magicBullet == 0, nextEffect);
+        pool.ShootBullet(BulletOrigin.Position, RotationTarget.Transform.forward, bulletSpeed, magicBullet == 0, nextEffect);
     }
 
     private void OnHit(Collider obj, Vector3 point, Vector3 direction, bool magic, EffectType effect)
@@ -167,11 +167,13 @@ public class ShootComponent : MonoBehaviour
         }
     }
 
-    private Vector3 TEST_start, TEST_end;
+    private Vector3 start, end;
     void Laser(EffectContext context)
     {
-        TEST_start = context.point;
-        TEST_end = context.point + context.direction * 5;
+        start = context.point;
+        end = context.point + context.direction * 5;
+        var direction = end - start;
+        Physics.OverlapBox(start + (direction) / 2, new Vector3(Mathf.Min(direction.x, 1), 1, Mathf.Min(direction.z, 1)));
     }
 
     Vector3 HitPos, ShootPos;
@@ -185,9 +187,11 @@ public class ShootComponent : MonoBehaviour
         //Gizmos.DrawSphere(healPoint, 3  );
 
         Gizmos.color = new Color(1, 0, 1);
-        Gizmos.DrawLine(TEST_start, TEST_end);
-        Gizmos.DrawSphere(TEST_start, 0.2f);
-        Gizmos.DrawSphere(TEST_end, 0.2f);
+        //Gizmos.DrawLine(start, end);
+        //Gizmos.DrawSphere(start, 0.2f);
+        //Gizmos.DrawSphere(end, 0.2f);
+        var direction = end - start;
+        Gizmos.DrawWireCube(start + (direction) / 2, new Vector3(Mathf.Max(Mathf.Abs(direction.x), 1), 1, Mathf.Max(Mathf.Abs(direction.z), 1)));
     }
 
     enum ShootMode
