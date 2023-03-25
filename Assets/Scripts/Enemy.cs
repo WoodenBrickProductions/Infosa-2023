@@ -103,13 +103,18 @@ public class Enemy : MonoBehaviour
                 Knockback(context);
                 break;
             case EffectType.HEAL:
-                TakeDamage(-context.strength * HEAL_MULT);
+                //TakeDamage(-context.strength * HEAL_MULT);
                 break;
             case EffectType.SPEEDBOOST:
                 if (speedBoost != null)
                     StopCoroutine(speedBoost);
 
                 speedBoost = StartCoroutine(Speedboost(context));
+                break;
+            case EffectType.LASER:
+                break;
+            case EffectType.LASER_BOUNCE:
+                TakeDamage(context.strength * LASER_MULT);
                 break;
         }
     }
@@ -135,6 +140,7 @@ public class Enemy : MonoBehaviour
     const float KNOCKBACK_MULT = 0.5f;
     const float HEAL_MULT = 10;
     const float SPEEDBOOST_MULT = 1;
+    const float LASER_MULT = 10;
 
     void Knockback(EffectContext context)
     {

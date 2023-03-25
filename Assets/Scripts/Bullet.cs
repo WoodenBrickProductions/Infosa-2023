@@ -80,13 +80,20 @@ public class Bullet : MonoBehaviour
         var hitEffect = Instantiate(hitVisualEffect, transform.position, default, null);
 
         Deactivate();
-        Debug.Log("Projectile hit " + collision.gameObject.name);
+        Debug.Log("Projectile hit " + collision.gameObject.name + " bullet type: " + (magic ? "magic" : "regular") + " " + effect);
 
-        var point = collision.collider.ClosestPoint(transform.position);
+        var point = collision.collider.ClosestPointOnBounds(transform.position);
         
         if(magic && effect == EffectType.LASER)
         {
-            direction = collision.GetContact(0).normal;
+            if(collision.gameObject.GetComponent<Enemy>() != null)
+            {
+                effect = EffectType.NULL;
+            }
+            else
+            {
+                direction = collision.GetContact(0).normal;
+            }
         }
 
         pool.OnHit(collision.collider, point, direction, magic, effect);
