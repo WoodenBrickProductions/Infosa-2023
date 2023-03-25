@@ -49,6 +49,10 @@ public class Bullet : MonoBehaviour
             case EffectType.SPEEDBOOST:
                 renderer.material.color = Color.blue;
                 break;
+            case EffectType.LASER: 
+            case EffectType.LASER_BOUNCE:
+                renderer.material.color = new Color(1, 0, 1);
+                break;
         }
     }
 
