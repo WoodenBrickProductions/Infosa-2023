@@ -23,10 +23,12 @@ public class SoundPlayer : MonoBehaviour
         if (data.type == SoundData.Type.MusicLayer)
         {
             source.loop = true;
+            source.volume = 0.2f;
         }
         else
         {
             source.loop = false;
+            source.volume = 1.0f;
         }
         
         source.Play();

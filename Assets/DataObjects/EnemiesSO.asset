@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EnemiesSO
   m_EditorClassIdentifier: 
   _enemyPrefabs:
-  - {fileID: 5263531523852360067, guid: 36b70e4b8c97a944dabdfbd0bacdd269, type: 3}
+  - {fileID: 3724182884662287331, guid: 494f66c409e12f14c9718d3ce9ef69b1, type: 3}

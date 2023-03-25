@@ -62,12 +62,16 @@ PrefabInstance:
       objectReference: {fileID: 2066527526223059252}
     - target: {fileID: 6381512490931269620, guid: 36b70e4b8c97a944dabdfbd0bacdd269, type: 3}
       propertyPath: MaxHealth
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6381512490931269620, guid: 36b70e4b8c97a944dabdfbd0bacdd269, type: 3}
       propertyPath: flashFalloff
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6381512490931269620, guid: 36b70e4b8c97a944dabdfbd0bacdd269, type: 3}
+      propertyPath: dieVisualEffect
+      value: 
+      objectReference: {fileID: 6373821460186477496, guid: 4a584ca61e8fa5b4fae0c90e81ee04a9, type: 3}
     - target: {fileID: 6381512490931269620, guid: 36b70e4b8c97a944dabdfbd0bacdd269, type: 3}
       propertyPath: flashFromDamage
       value: 1

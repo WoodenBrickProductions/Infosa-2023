@@ -7,11 +7,14 @@ public class RunManager : MonoBehaviour
 {
     [SerializeField] private GameObject _playerObject;
     [SerializeField] private GameObject _playerPrefab;
+    [SerializeField] private RunSO _endlessRunData;
 
     [SerializeField] private LevelsSO _levels;
     [SerializeField] private UnityEvent _onRunStart;
     [SerializeField] private UnityEvent _onNextRoom;
     [SerializeField] private UnityEvent _onRunEnd;
+    
+    
 
     private GameObject _player;
     private LevelBase _currentLevel;
@@ -40,6 +43,11 @@ public class RunManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void Start()
+    {
+        StartRun(_endlessRunData);
+    }
+
     public void StartRun(RunSO runData)
     {
         _runData = runData;
@@ -50,6 +58,8 @@ public class RunManager : MonoBehaviour
         
         _currentLevel = Instantiate(_levels.GetRandom()).GetComponent<LevelBase>();
         _currentLevel.Initialize(this);
+        
+        GameState.Instance.RequestState(GameState.Type.InGame);
         
         SoundSystem.Instance.PlaySound("track-action");
         SoundSystem.Instance.PlaySound("fx-start-action");
