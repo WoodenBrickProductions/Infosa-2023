@@ -1,3 +1,4 @@
+using System;
 using Levels;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,10 +18,31 @@ public class RunManager : MonoBehaviour
 
     private int _roomCounter = 0;
 
+    private static RunManager _instance;
+
+    public static RunManager Instance
+    {
+        get => _instance;
+    }
+    
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
+        DontDestroyOnLoad(gameObject);
+    }
+
     // TODO: remove later
     private void Start()
     {
-        DontDestroyOnLoad(this);
+        
     }
 
     public void StartRun(RunSO runData)
