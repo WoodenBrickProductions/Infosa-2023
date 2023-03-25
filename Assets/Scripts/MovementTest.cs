@@ -17,12 +17,19 @@ public class MovementTest : MonoBehaviour
 	[Header("Stats")]
 	public float currentSpeed;
 
+	private Rigidbody rigidbody;
+
 	Vector2 rotation = Vector2.zero;
 	const string xAxis = "Mouse X"; //Strings in direct code generate garbage, storing and re-using them creates no garbage
 	const string yAxis = "Mouse Y";
 
-	// Update is called once per frame
-	void Update()
+    private void Awake()
+    {
+		rigidbody = GetComponent<Rigidbody>();
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         int horizontal = (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) ? -1 : 0) +
                  (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) ? 1 : 0) ;
@@ -34,7 +41,7 @@ public class MovementTest : MonoBehaviour
 		dir.y = 0;
 		dir = dir.normalized;
 
-		transform.position += dir * currentSpeed * Time.deltaTime;
+		rigidbody.AddForce(dir * currentSpeed * Time.deltaTime * 10, ForceMode.Impulse);
 
 		rotation.x += Input.GetAxis(xAxis) * sensitivity;
 		
