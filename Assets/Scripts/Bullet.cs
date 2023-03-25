@@ -38,22 +38,24 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        switch (effect)
-        {
-            case EffectType.KNOCKBACK:
-                renderer.material.color = Color.black;
-                break;
-            case EffectType.HEAL:
-                renderer.material.color = Color.yellow;
-                break;
-            case EffectType.SPEEDBOOST:
-                renderer.material.color = Color.blue;
-                break;
-            case EffectType.LASER: 
-            case EffectType.LASER_BOUNCE:
-                renderer.material.color = new Color(1, 0, 1);
-                break;
-        }
+        renderer.material.color = Color.yellow;
+
+        //switch (effect)
+        //{
+        //    case EffectType.KNOCKBACK:
+        //        renderer.material.color = Color.black;
+        //        break;
+        //    case EffectType.HEAL:
+        //        renderer.material.color = Color.yellow;
+        //        break;
+        //    case EffectType.SPEEDBOOST:
+        //        renderer.material.color = Color.blue;
+        //        break;
+        //    case EffectType.LASER: 
+        //    case EffectType.LASER_BOUNCE:
+        //        renderer.material.color = new Color(1, 0, 1);
+        //        break;
+        //}
     }
 
     void Deactivate()

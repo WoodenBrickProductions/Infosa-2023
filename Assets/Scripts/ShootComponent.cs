@@ -47,6 +47,11 @@ public class ShootComponent : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        HUD.instance.UpdateShot(-1, nextEffect);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -63,6 +68,7 @@ public class ShootComponent : MonoBehaviour
         {
             timer = 1.0f / fireRate;
             magicBullet--;
+            HUD.instance.UpdateShot(magicBullet, nextEffect);
 
             switch (shootMode)
             {
@@ -80,6 +86,7 @@ public class ShootComponent : MonoBehaviour
             {
                 magicBullet = randomBulletOrder ? Random.Range(magicBulletMin, magicBulletMax) : magicBulletMax;
                 nextEffect = randomBulletType ? (EffectType)Random.Range(0, effectCount) : effectType;
+                HUD.instance.UpdateShot(-1, nextEffect);
             }
         }
     }
