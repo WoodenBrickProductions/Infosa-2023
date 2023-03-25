@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float movementSpeed = 10;
     [SerializeField] private float maxHealth = 100;
 
-    private float currentHealth;
+    [SerializeField] private float currentHealth;
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         movement.currentSpeed = movementSpeed;
     }
 
-    const float KNOCKBACK_MULT = 1;
+    const float KNOCKBACK_MULT = 10;
     const float HEAL_MULT = 10;
     const float SPEEDBOOST_MULT = 1;
 
@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
         switch (context.type)
         {
             case EffectType.KNOCKBACK:
-                //Knockback(context);
+                Knockback(context);
                 break;
             case EffectType.HEAL:
                 TakeDamage(-context.strength * HEAL_MULT);
@@ -45,6 +45,11 @@ public class Player : MonoBehaviour
                 StartCoroutine(Speedboost(context));
                 break;
         }
+    }
+
+    void Knockback(EffectContext context)
+    {
+        movement.Knockback(context.direction, context.strength * KNOCKBACK_MULT);
     }
 
     IEnumerator Speedboost(EffectContext context)

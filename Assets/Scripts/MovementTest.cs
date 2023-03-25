@@ -17,7 +17,7 @@ public class MovementTest : MonoBehaviour
 	[Header("Stats")]
 	public float currentSpeed;
 
-	private Rigidbody rigidbody;
+	private new Rigidbody rigidbody;
 
 	Vector2 rotation = Vector2.zero;
 	const string xAxis = "Mouse X"; //Strings in direct code generate garbage, storing and re-using them creates no garbage
@@ -41,7 +41,7 @@ public class MovementTest : MonoBehaviour
 		dir.y = 0;
 		dir = dir.normalized;
 
-		rigidbody.AddForce(dir * currentSpeed * Time.deltaTime * 10, ForceMode.Impulse);
+		rigidbody.AddForce(dir * currentSpeed, ForceMode.VelocityChange);
 
 		rotation.x += Input.GetAxis(xAxis) * sensitivity;
 		
@@ -56,4 +56,9 @@ public class MovementTest : MonoBehaviour
 
 		transform.localRotation = xQuat * yQuat; //Quaternions seem to rotate more consistently than EulerAngles. Sensitivity seemed to change slightly at certain degrees using Euler. transform.localEulerAngles = new Vector3(-rotation.y, rotation.x, 0);
 	}
+
+	public void Knockback(Vector3 direction, float strength)
+    {
+		rigidbody.AddForce(direction * strength, ForceMode.VelocityChange);
+    }
 }

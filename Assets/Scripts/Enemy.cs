@@ -11,9 +11,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float currentHealth;
     [SerializeField] Transform rotationOrigin;
     [SerializeField] float movementSpeed = 3;
+    [SerializeField] float collisionDamage = 3;
+    [SerializeField] float collisionKnockback = 1;
     private NavMeshAgent agent;
 
     private Coroutine speedBoost;
+    private EffectContext knockbackEffect = new EffectContext();
 
     private void Awake()
     {
@@ -23,6 +26,7 @@ public class Enemy : MonoBehaviour
         }
 
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = movementSpeed;
         currentHealth = MaxHealth;
     }
 
@@ -93,7 +97,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    const float KNOCKBACK_MULT = 1;
+    const float KNOCKBACK_MULT = 0.5f;
     const float HEAL_MULT = 10;
     const float SPEEDBOOST_MULT = 1;
 
@@ -111,6 +115,22 @@ public class Enemy : MonoBehaviour
         agent.speed = movementSpeed;
 
         yield return 0;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        var player = collision.gameObject.GetComponent<Player>();
+        if (player == null)
+            return;
+
+        player.TakeDamage(collisionDamage);
+
+        knockbackEffect.strength = collisionKnockback;
+        knockbackEffect.type = EffectType.KNOCKBACK;
+        var dir = player.transform.position - transform.position;
+        dir.y = 0;
+        knockbackEffect.direction = dir.normalized;
+        player.ApplyEffect(knockbackEffect);
     }
 
     private void OnDrawGizmos()
