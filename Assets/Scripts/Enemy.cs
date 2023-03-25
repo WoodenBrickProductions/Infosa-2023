@@ -16,11 +16,22 @@ public class Enemy : MonoBehaviour
     [SerializeField] float collisionKnockback = 1;
     private NavMeshAgent agent;
 
+    [SerializeField] private VisualEffect dieVisualEffect;
+
     private Coroutine speedBoost;
     private EffectContext knockbackEffect = new EffectContext();
 
     public event Action OnHit;
     private EnemySpawner _spawner;
+
+    [SerializeField] float flashFromDamage;
+    [SerializeField] float flashFalloff;
+    [SerializeField] private SpriteRenderer rend;
+    [SerializeField] Color normalOutlineColor = Color.white;
+
+    float flash = 0;
+
+    Coroutine flashCoroutine;
 
     public void SetSpawner(EnemySpawner spawner)
     {
@@ -67,6 +78,8 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        AddFlash(amount * flashFromDamage);
+
         currentHealth -= amount;
         if(currentHealth <= 0)
         {
@@ -103,6 +116,8 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        var dieEffect = Instantiate(dieVisualEffect, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), default, null);
+
         _spawner?.SendDeath(this);
         enabled = false;
         Destroy(gameObject);
@@ -159,5 +174,33 @@ public class Enemy : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(transform.position + Vector3.up * 2, currentHealth / MaxHealth / 2);
+    }
+
+
+    private void AddFlash(float amount)
+    {
+        flash = Mathf.Min(flash + amount, 1);
+
+        if (flashCoroutine != null) StopCoroutine(flashCoroutine);
+        flashCoroutine = StartCoroutine(Flash());
+    }
+
+    IEnumerator Flash()
+    {
+        List<SpriteRenderer> Srs = new List<SpriteRenderer>();
+        GetComponentsInChildren<SpriteRenderer>(Srs);
+        Srs = Srs.FindAll(item => item.material.HasProperty("_Overlay"));
+
+        while (flash > 0)
+        {
+            foreach (var sr in Srs)
+            {
+                sr.material.SetFloat("_Overlay", Mathf.Clamp01(flash));
+            }
+            yield return null;
+            flash -= Time.deltaTime * flashFalloff;
+        }
+
+        flashCoroutine = null;
     }
 }

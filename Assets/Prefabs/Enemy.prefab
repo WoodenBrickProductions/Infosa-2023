@@ -157,7 +157,7 @@ MonoBehaviour:
   MaxHealth: 100
   currentHealth: 0
   rotationOrigin: {fileID: 0}
-  movementSpeed: 1
+  movementSpeed: 2
   collisionDamage: 3
   collisionKnockback: 1
 --- !u!195 &6518335434940797035
