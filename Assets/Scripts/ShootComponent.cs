@@ -12,6 +12,11 @@ public class ShootComponent : MonoBehaviour
     [SerializeField] private int magicBulletMin = 2;
     [SerializeField] private int magicBulletMax = 4;
     
+    [Header("Projectile")]
+    [SerializeField] private ShootMode shootMode = ShootMode.HITSCAN;
+    [SerializeField] private float bulletSpeed = 1;
+    [SerializeField] private BulletPool pool;
+
     private float timer = 0;
     private int magicBullet;
     private EffectType nextEffect;
@@ -21,6 +26,10 @@ public class ShootComponent : MonoBehaviour
     {
         magicBullet = Random.Range(magicBulletMin, magicBulletMax);
         nextEffect = (EffectType) Random.Range(0, effectCount);
+        if(shootMode == ShootMode.PROJECTILE)
+        {
+            pool.OnHitCallback += OnHit;
+        }
     }
 
     // Update is called once per frame
@@ -38,7 +47,15 @@ public class ShootComponent : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             timer = 1.0f / fireRate;
-            Shoot();
+            switch (shootMode)
+            {
+                case ShootMode.HITSCAN:
+                    Shoot();
+                    break;
+                case ShootMode.PROJECTILE:
+                    ShootProjectile();
+                    break;
+            }
         }
     }
 
@@ -49,24 +66,39 @@ public class ShootComponent : MonoBehaviour
         if (!Physics.Raycast(ray, out hit))
             return;
 
+        magicBullet--;
+        Hit(hit.point, hit.transform, ray.direction, false);
+    }
+
+    public void ShootProjectile()
+    {
+        pool.ShootBullet(RotationTarget.Position, RotationTarget.Transform.forward, bulletSpeed);
+    }
+
+    private void OnHit(Collider obj, Vector3 point, Vector3 direction)
+    {
+        Hit(point, obj.transform, direction, false);
+    }
+
+    private void Hit(Vector3 point, Transform hitTransform, Vector3 direction, bool magic)
+    {
         //Debug
         ShootPos = RotationTarget.Position;
-        HitPos = hit.point;
-        Debug.Log(hit.transform);
-        magicBullet--;
+        HitPos = point;
+        Debug.Log(point);
 
-        var enemy = hit.transform.GetComponent<Enemy>();
-        
-        if(magicBullet == 0)
+        var enemy = hitTransform.GetComponent<Enemy>();
+
+        if (magic)
         {
             var context = new EffectContext();
-            var dir = ray.direction;
+            var dir = direction;
             dir.y = 0;
             context.type = nextEffect;
             context.direction = dir;
             context.strength = 2;
             context.radius = 3;
-            context.point = hit.point;
+            context.point = point;
 
             switch (nextEffect)
             {
@@ -89,7 +121,6 @@ public class ShootComponent : MonoBehaviour
             return;
 
         enemy.TakeDamage(damage);
-
     }
 
     void Knockback(EffectContext context, Enemy enemy)
@@ -119,5 +150,11 @@ public class ShootComponent : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(ShootPos, HitPos);
         Gizmos.DrawSphere(HitPos, 0.1f);
+    }
+
+    enum ShootMode
+    {
+        HITSCAN,
+        PROJECTILE
     }
 }
