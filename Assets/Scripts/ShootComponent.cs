@@ -43,6 +43,7 @@ public class ShootComponent : MonoBehaviour
         if(shootMode == ShootMode.PROJECTILE)
         {
             pool.OnHitCallback += OnHit;
+            lazerPool.OnHitCallback += OnHit;
         }
     }
 
