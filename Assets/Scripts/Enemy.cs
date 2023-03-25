@@ -48,6 +48,8 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.speed = movementSpeed;
         currentHealth = MaxHealth;
+        
+        SoundSystem.Instance.PlaySound("fx-enemy-spawn", transform);
     }
 
     void Update()
@@ -79,6 +81,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float amount)
     {
         AddFlash(amount * flashFromDamage);
+        SoundSystem.Instance.PlaySound("fx-enemy-hurt", transform);
 
         currentHealth -= amount;
         if(currentHealth <= 0)
@@ -125,8 +128,8 @@ public class Enemy : MonoBehaviour
 
         _spawner?.SendDeath(this);
         
-        SoundSystem.Instance.PlaySound("fx-enemy-death");
-        SoundSystem.Instance.PlaySound("fx-impact");
+        SoundSystem.Instance.PlaySound("fx-enemy-death", transform);
+        SoundSystem.Instance.PlaySound("fx-impact", transform);
 
         enabled = false;
         Destroy(gameObject);

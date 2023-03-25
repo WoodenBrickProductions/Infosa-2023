@@ -60,6 +60,8 @@ public class EnemySpawner : MonoBehaviour
 
         onSpawnEvent?.Invoke();
         
+        SoundSystem.Instance.PlaySound("fx-spawner", transform);
+        
         _maxSpawnCounter++;
     }
 

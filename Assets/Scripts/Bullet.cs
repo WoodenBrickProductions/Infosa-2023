@@ -82,6 +82,7 @@ public class Bullet : MonoBehaviour
         OnHit.Invoke();
 
         var hitEffect = Instantiate(hitVisualEffect, transform.position, default, null);
+        SoundSystem.Instance.PlaySound("fx-bullet-impact", transform);
 
         Deactivate();
         Debug.Log("Projectile hit " + collision.gameObject.name + " bullet type: " + (magic ? "magic" : "regular") + " " + effect);

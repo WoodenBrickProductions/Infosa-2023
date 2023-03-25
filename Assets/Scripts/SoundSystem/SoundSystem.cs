@@ -59,7 +59,7 @@ public class SoundSystem : MonoBehaviour
         
     }
 
-    public void PlaySound(string sound)
+    public void PlaySound(string sound, Transform soundPosition = null)
     {
         // failsafe
         if (_initialized == false)
@@ -71,8 +71,15 @@ public class SoundSystem : MonoBehaviour
         if (SoundBank.data.Exists(item => item.name == sound))
         {
             var data = SoundBank.data.Find(item => item.name == sound);
-            
-            GetAvailablePlayer()?.Play(data);
+
+            if (soundPosition == null)
+            {
+                GetAvailablePlayer()?.Play(data);
+            }
+            else
+            {
+                GetAvailablePlayer()?.Play(data, soundPosition);
+            }
         }
     }
 
