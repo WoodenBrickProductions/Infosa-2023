@@ -35,6 +35,11 @@ public class EnemySpawner : MonoBehaviour
         _timer = 0.0f;
         Spawn();
     }
+    
+    public void SendDeath(Enemy enemy)
+    {
+        _spawnedEnemies.Remove(enemy.gameObject);
+    }
 
     private void Spawn()
     {
@@ -45,6 +50,7 @@ public class EnemySpawner : MonoBehaviour
         spawnedEnemy.transform.position = transform.position;
         
         _spawnedEnemies.Add(spawnedEnemy);
+        spawnedEnemy.GetComponent<Enemy>().SetSpawner(this);
 
         onSpawnEvent?.Invoke();
         
@@ -53,9 +59,6 @@ public class EnemySpawner : MonoBehaviour
 
     private bool CanSpawn()
     {
-        // refresh list
-        RefreshSpawnedEnemies();
-
         return _spawnedEnemies.Count < _maxSpawnedAmount;
     }
 
@@ -65,13 +68,7 @@ public class EnemySpawner : MonoBehaviour
             return false;
         
         // Checks if enemies have been killed
-        return _spawnedEnemies.Where(enemy => enemy != null).ToList().Count == 0;
-    }
-
-    // TODO! this should be redundant, as enemies would report their death to spawner
-    private void RefreshSpawnedEnemies()
-    {
-        _spawnedEnemies = _spawnedEnemies.Where(enemy => enemy != null).ToList();
+        return _spawnedEnemies.Count == 0;
     }
 
 #if UNITY_EDITOR

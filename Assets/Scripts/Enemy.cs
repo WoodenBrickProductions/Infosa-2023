@@ -18,6 +18,13 @@ public class Enemy : MonoBehaviour
     private Coroutine speedBoost;
     private EffectContext knockbackEffect = new EffectContext();
 
+    private EnemySpawner _spawner;
+
+    public void SetSpawner(EnemySpawner spawner)
+    {
+        _spawner = spawner;
+    }
+
     private void Awake()
     {
         if(rotationOrigin == null)
@@ -87,6 +94,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        _spawner.SendDeath(this);
         enabled = false;
         Destroy(gameObject);
     }
