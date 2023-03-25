@@ -16,7 +16,7 @@ public class RunManager : MonoBehaviour
     
     
 
-    private GameObject _player;
+    public Player _player { private set; get; }
     private LevelBase _currentLevel;
     private RunSO _runData;
 
@@ -52,7 +52,8 @@ public class RunManager : MonoBehaviour
     {
         _runData = runData;
         _playerObject = Instantiate(_playerPrefab, null);
-        
+        _player = _playerObject.GetComponent<Player>();
+
         // TODO: add player interactable
         _roomCounter = 0;
         
@@ -104,5 +105,11 @@ public class RunManager : MonoBehaviour
         SoundSystem.Instance.StopSound("track-action");
         
         _onRunEnd.Invoke();
+    }
+
+    public void RestartRun()
+    {
+        EndRun();
+        StartRun(_endlessRunData);
     }
 }

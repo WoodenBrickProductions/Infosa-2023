@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -9,9 +10,8 @@ public class Player : MonoBehaviour
 
     [Header("Stats")]
     [SerializeField] private float movementSpeed = 10;
-    [SerializeField] private float maxHealth = 100;
-
-    [SerializeField] private float currentHealth;
+    public float maxHealth = 3;
+    public float currentHealth;
 
     private Coroutine speedBoost;
 
@@ -71,9 +71,13 @@ public class Player : MonoBehaviour
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
+
+        HUD.instance.Damaged();
+
         if (currentHealth <= 0)
         {
             Die();
+            return;
         }
 
         if (currentHealth > maxHealth)
@@ -84,6 +88,6 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-
+        //RunManager.Instance.RestartRun();
     }
 }
