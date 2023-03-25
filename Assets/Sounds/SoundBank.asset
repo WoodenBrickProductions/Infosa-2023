@@ -59,7 +59,7 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: d5201f962db6744b2b5945bd60affb4a, type: 3}
     type: 10
-    volume: 0.8
+    volume: 0.6
   - name: fx-enemy-hurt
     clips:
     - {fileID: 8300000, guid: d030025986eb34fa78e6454ec89b414c, type: 3}
@@ -73,7 +73,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 9b99b18f89b2f459386d62ebc96c08b1, type: 3}
     - {fileID: 8300000, guid: 510dfae966c144d51a4ca1107f4dea8f, type: 3}
     type: 10
-    volume: 0.5
+    volume: 0.4
   - name: fx-spawner
     clips:
     - {fileID: 8300000, guid: b2f78bb6d44c04b8d9aa9ee3c720e2d7, type: 3}
