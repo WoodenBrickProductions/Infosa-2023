@@ -140,7 +140,7 @@ public class Enemy : MonoBehaviour
     const float KNOCKBACK_MULT = 0.5f;
     const float HEAL_MULT = 10;
     const float SPEEDBOOST_MULT = 1;
-    const float LASER_MULT = 10;
+    const float LASER_MULT = 1.5f;
 
     void Knockback(EffectContext context)
     {
