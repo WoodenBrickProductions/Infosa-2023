@@ -54,9 +54,24 @@ public class EnemySpawner : MonoBehaviour
     private bool CanSpawn()
     {
         // refresh list
-        _spawnedEnemies = _spawnedEnemies.Where(enemy => enemy != null).ToList();
+        RefreshSpawnedEnemies();
 
         return _spawnedEnemies.Count < _maxSpawnedAmount;
+    }
+
+    public bool AllSpawnablesKilled()
+    {
+        if (_maxSpawnCounter < _maxSpawns) 
+            return false;
+        
+        // Checks if enemies have been killed
+        return _spawnedEnemies.Where(enemy => enemy != null).ToList().Count == 0;
+    }
+
+    // TODO! this should be redundant, as enemies would report their death to spawner
+    private void RefreshSpawnedEnemies()
+    {
+        _spawnedEnemies = _spawnedEnemies.Where(enemy => enemy != null).ToList();
     }
 
 #if UNITY_EDITOR

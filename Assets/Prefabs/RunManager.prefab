@@ -44,4 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0573e213e545543db917fbdbaaa80147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerObject: {fileID: 0}
+  _playerPrefab: {fileID: 1044332058592280514, guid: 9d9a89e4643a37241b2748dbbbadd9ff, type: 3}
   _levels: {fileID: 11400000, guid: b7ef33de626354292b89d6f7de1e69f0, type: 2}
+  _onRunStart:
+    m_PersistentCalls:
+      m_Calls: []
+  _onNextRoom:
+    m_PersistentCalls:
+      m_Calls: []
+  _onRunEnd:
+    m_PersistentCalls:
+      m_Calls: []
