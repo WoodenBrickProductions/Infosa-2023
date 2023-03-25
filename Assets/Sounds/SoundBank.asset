@@ -79,3 +79,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: b2f78bb6d44c04b8d9aa9ee3c720e2d7, type: 3}
     type: 10
     volume: 0.6
+  - name: fx-player-damaged
+    clips:
+    - {fileID: 8300000, guid: 9565a2a3ee36540699d8cf7fe00dee74, type: 3}
+    type: 10
+    volume: 0.9

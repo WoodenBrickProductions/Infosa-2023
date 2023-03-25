@@ -73,6 +73,8 @@ public class Player : MonoBehaviour
         currentHealth -= amount;
 
         HUD.instance.Damaged();
+        
+        SoundSystem.Instance.PlaySound("fx-player-damaged");
 
         if (currentHealth <= 0)
         {
