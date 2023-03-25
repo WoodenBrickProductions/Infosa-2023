@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183e3ce218948cb48851eec53ed22d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1.4
+  movementSpeed: 0.5
   maxHealth: 100
   currentHealth: 0
 --- !u!114 &2122449006118370038
@@ -115,10 +115,10 @@ MonoBehaviour:
   fireRate: 4
   damage: 1
   randomBulletOrder: 0
-  randomBulletType: 0
-  effectType: 3
+  randomBulletType: 1
+  effectType: 0
   magicBulletMin: 2
-  magicBulletMax: 1
+  magicBulletMax: 6
   shootMode: 1
   bulletSpeed: 15
   pool: {fileID: 8277309839568400870}
@@ -802,7 +802,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1796454742428374829, guid: b092d34ed1ba1984c979f493e2428389, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 465499780962724273}
   m_SourcePrefab: {fileID: 100100000, guid: b092d34ed1ba1984c979f493e2428389, type: 3}
 --- !u!4 &1000526123314575438 stripped
 Transform:
@@ -814,3 +817,15 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1796454742428374829, guid: b092d34ed1ba1984c979f493e2428389, type: 3}
   m_PrefabInstance: {fileID: 8418977807152964714}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &465499780962724273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798120899306959687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 490cdd6e3ca762745878e9bf28bcb49a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
