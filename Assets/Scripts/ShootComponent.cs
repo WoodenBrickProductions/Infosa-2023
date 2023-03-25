@@ -67,7 +67,7 @@ public class ShootComponent : MonoBehaviour
             return;
 
         magicBullet--;
-        Hit(hit.point, hit.transform, ray.direction, false);
+        Hit(hit.point, hit.transform, ray.direction, magicBullet == 0);
     }
 
     public void ShootProjectile()
