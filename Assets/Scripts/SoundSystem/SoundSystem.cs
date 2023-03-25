@@ -11,6 +11,7 @@ public class SoundSystem : MonoBehaviour
     public List<SoundPlayer> players = new List<SoundPlayer>();
 
     private static SoundSystem _instance;
+    private bool _initialized = false;
 
     public static SoundSystem Instance
     {
@@ -32,12 +33,19 @@ public class SoundSystem : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < 10; i++)
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        for (int i = 0; i < 20; i++)
         {
             var go = new GameObject();
-            go.transform.parent = this.transform;
+            go.transform.parent = transform;
             _instance.players.Add(go.AddComponent<SoundPlayer>());
         }
+
+        _initialized = true;
     }
 
     void LateUpdate()
@@ -53,10 +61,17 @@ public class SoundSystem : MonoBehaviour
 
     public void PlaySound(string sound)
     {
+        // failsafe
+        if (_initialized == false)
+        {
+            Initialize();
+        }
+        
         // TODO! EFFICIENT
         if (SoundBank.data.Exists(item => item.name == sound))
         {
             var data = SoundBank.data.Find(item => item.name == sound);
+            
             GetAvailablePlayer()?.Play(data);
         }
     }
@@ -74,24 +89,6 @@ public class SoundSystem : MonoBehaviour
     private SoundPlayer GetAvailablePlayer()
     {
         // TODO! EFFICIENT
-        return _instance.players.Where(player => player.source.isPlaying == false).FirstOrDefault();
-    }
-
-    [MenuItem("SoundSystem/Initialize in project")]
-    public static void InitializeInProject()
-    {
-        // TODO! 
-        
-        Debug.Log("Initializing sound system in project");
-        // Create directories
-        
-        
-        // Create a mixer at the root of sounds directory
-        
-        // Create a first soundbank
-        
-        // Assign those assets to required fields
-        
-        // Refresh asset database
+        return _instance.players.FirstOrDefault(player => player.source.isPlaying == false);
     }
 }

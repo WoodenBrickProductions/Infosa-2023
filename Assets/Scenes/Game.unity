@@ -260,10 +260,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3502689161163477941, guid: 4e3f0644bc6b445da92fe0194a9ba9f1, type: 3}
-      propertyPath: _endlessRunData
-      value: 
-      objectReference: {fileID: 11400000, guid: 09946717248754a66ad0894c53374e1d, type: 2}
     - target: {fileID: 3565693634616754948, guid: 4e3f0644bc6b445da92fe0194a9ba9f1, type: 3}
       propertyPath: m_Name
       value: RunManager
