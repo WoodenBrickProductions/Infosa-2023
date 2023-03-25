@@ -11,6 +11,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float _timeBetweenSpawns = 1.0f;
     
     [SerializeField] private UnityEvent onSpawnEvent;
+    [SerializeField] public UnityEvent onAllKilledEvent;
 
     [SerializeField] private List<GameObject> _spawnedEnemies;
 
@@ -39,6 +40,11 @@ public class EnemySpawner : MonoBehaviour
     public void SendDeath(Enemy enemy)
     {
         _spawnedEnemies.Remove(enemy.gameObject);
+
+        if (AllSpawnablesKilled())
+        {
+            onAllKilledEvent?.Invoke();
+        }
     }
 
     private void Spawn()
