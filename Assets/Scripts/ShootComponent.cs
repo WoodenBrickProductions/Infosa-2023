@@ -29,11 +29,12 @@ public class ShootComponent : MonoBehaviour
     [SerializeField] private ShootMode shootMode = ShootMode.HITSCAN;
     [SerializeField] private float bulletSpeed = 1;
     [SerializeField] private BulletPool pool;
+    [SerializeField] private BulletPool lazerPool;
 
     private float timer = 0;
     private int magicBullet;
     private EffectType nextEffect;
-    private int effectCount = Enum.GetNames(typeof(EffectType)).Length;
+    private int effectCount = activeTypeCount;
 
     private void Awake()
     {
@@ -82,7 +83,7 @@ public class ShootComponent : MonoBehaviour
 
     public void Shoot()
     {
-        var ray = new Ray(BulletOrigin.Position, RotationTarget.Transform.forward);
+        var ray = new Ray(BulletOrigin.Position, ((RotationTarget.Transform.forward * 2) - BulletOrigin.Position).normalized);
         RaycastHit hit;
         if (!Physics.Raycast(ray, out hit))
             return;
@@ -113,6 +114,11 @@ public class ShootComponent : MonoBehaviour
 
         var enemy = hitTransform.GetComponent<Enemy>();
 
+        if(enemy != null)
+        {
+            Debug.Log("Hit enemy");
+        }
+
         if (magic)
         {
             var context = new EffectContext();
@@ -128,7 +134,7 @@ public class ShootComponent : MonoBehaviour
             switch (effect)
             {
                 case EffectType.KNOCKBACK:
-                    Knockback(context, enemy);
+                    ApplyToEnemy(context, enemy);
                     break;
                 case EffectType.HEAL:
                     ApplyEffect(context);
@@ -138,6 +144,11 @@ public class ShootComponent : MonoBehaviour
                     break;
                 case EffectType.LASER:
                     Laser(context);
+                    break;
+                case EffectType.LASER_BOUNCE:
+                    ApplyToEnemy(context, enemy);
+                    break;
+                case EffectType.NULL:
                     break;
             }
             return;
@@ -149,7 +160,7 @@ public class ShootComponent : MonoBehaviour
         enemy.TakeDamage(damage);
     }
 
-    void Knockback(EffectContext context, Enemy enemy)
+    void ApplyToEnemy(EffectContext context, Enemy enemy)
     {
         if (enemy == null)
             return;
@@ -183,10 +194,35 @@ public class ShootComponent : MonoBehaviour
         start = context.point;
         end = context.point + context.direction * 5;
         var direction = end - start;
-        Physics.OverlapBox(start + (direction) / 2, new Vector3(Mathf.Min(direction.x, 1), 1, Mathf.Min(direction.z, 1)));
+        //var col1 = Physics.OverlapBox(start + (direction) / 2, new Vector3(Mathf.Min(direction.x, 1), 1, Mathf.Min(direction.z, 1)));
+        //var col2 = Physics.OverlapBox(start - (direction) / 2, new Vector3(Mathf.Min(direction.x, 1), 1, Mathf.Min(direction.z, 1)));
+        
+        //foreach(var col in col1)
+        //{
+        //    var enemy = col.GetComponent<Enemy>();
+        //    if (enemy == null)
+        //        continue;
+
+        //    enemy.ApplyEffect(context);
+        //}
+
+        //foreach(var col in col2)
+        //{
+        //    var enemy = col.GetComponent<Enemy>();
+        //    if (enemy == null)
+        //        continue;
+
+        //    enemy.ApplyEffect(context);
+        //}
+
+        lazerPool.ShootBullet(start + direction / 4, direction.normalized, bulletSpeed * 2, true, EffectType.LASER_BOUNCE);
+        lazerPool.ShootBullet(start - direction / 4, -direction.normalized, bulletSpeed * 2, true, EffectType.LASER_BOUNCE);
+
+        alpha = 1;
     }
 
     Vector3 HitPos, ShootPos;
+    float alpha = 0;
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -196,12 +232,17 @@ public class ShootComponent : MonoBehaviour
         Gizmos.color = Color.blue;
         //Gizmos.DrawSphere(healPoint, 3  );
 
-        Gizmos.color = new Color(1, 0, 1);
+        Gizmos.color = new Color(1, 0, 1, alpha);
         //Gizmos.DrawLine(start, end);
         //Gizmos.DrawSphere(start, 0.2f);
         //Gizmos.DrawSphere(end, 0.2f);
         var direction = end - start;
-        Gizmos.DrawWireCube(start + (direction) / 2, new Vector3(Mathf.Max(Mathf.Abs(direction.x), 1), 1, Mathf.Max(Mathf.Abs(direction.z), 1)));
+        //Gizmos.DrawCube(start + (direction) / 2, new Vector3(Mathf.Max(Mathf.Abs(direction.x), 1), 1, Mathf.Max(Mathf.Abs(direction.z), 1)));
+        //Gizmos.DrawCube(start - (direction) / 2, new Vector3(Mathf.Max(Mathf.Abs(direction.x), 1), 1, Mathf.Max(Mathf.Abs(direction.z), 1)));
+        if(alpha > 0)
+        {
+            alpha -= Time.deltaTime;
+        }
     }
 
     enum ShootMode
@@ -209,6 +250,8 @@ public class ShootComponent : MonoBehaviour
         HITSCAN,
         PROJECTILE
     }
+    
+    const int activeTypeCount = 4;
 }
 
 public enum EffectType
@@ -216,7 +259,10 @@ public enum EffectType
     KNOCKBACK,
     HEAL,
     SPEEDBOOST,
-    LASER
+    LASER,
+
+    LASER_BOUNCE,
+    NULL
 }
 
 public struct EffectContext
