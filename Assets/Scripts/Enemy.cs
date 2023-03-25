@@ -77,7 +77,10 @@ public class Enemy : MonoBehaviour
                 TakeDamage(-context.strength * HEAL_MULT);
                 break;
             case EffectType.SPEEDBOOST:
-                StartCoroutine(Speedboost(context));
+                if (speedBoost != null)
+                    StopCoroutine(speedBoost);
+
+                speedBoost = StartCoroutine(Speedboost(context));
                 break;
         }
     }
@@ -131,6 +134,8 @@ public class Enemy : MonoBehaviour
         dir.y = 0;
         knockbackEffect.direction = dir.normalized;
         player.ApplyEffect(knockbackEffect);
+
+        transform.position += -knockbackEffect.direction * knockbackEffect.strength * KNOCKBACK_MULT;
     }
 
     private void OnDrawGizmos()
@@ -138,21 +143,4 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(transform.position + Vector3.up * 2, currentHealth / MaxHealth / 2);
     }
-}
-
-public enum EffectType
-{
-    KNOCKBACK,
-    HEAL,
-    SPEEDBOOST
-}
-
-public struct EffectContext
-{
-    public EffectType type;
-    public Vector3 direction;
-    public float strength;
-    public float radius;
-    public Vector3 point;
-    public float duration;
 }
