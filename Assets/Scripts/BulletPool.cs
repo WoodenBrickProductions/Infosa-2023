@@ -37,14 +37,13 @@ public class BulletPool : MonoBehaviour
         if (current == bullets.Length)
             current = 0;
 
+        bullet.Activate();
         bullet.direction = direction;
         bullet.speed = speed;
         bullet.timer = 10;
         bullet.magic = magic;
         bullet.effect = effect;
         bullet.transform.position = position;
-        bullet.gameObject.SetActive(true);
-        bullet.enabled = true;
     }
 
     public void OnHit(Collider other, Vector3 point, Vector3 direction, bool magic, EffectType effect)

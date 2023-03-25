@@ -9,10 +9,11 @@ public class Enemy : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private float MaxHealth = 100;
     [SerializeField] private float currentHealth;
-    
     [SerializeField] Transform rotationOrigin;
-
+    [SerializeField] float movementSpeed = 3;
     private NavMeshAgent agent;
+
+    private Coroutine speedBoost;
 
     private void Awake()
     {
@@ -72,6 +73,7 @@ public class Enemy : MonoBehaviour
                 TakeDamage(-context.strength * HEAL_MULT);
                 break;
             case EffectType.SPEEDBOOST:
+                StartCoroutine(Speedboost(context));
                 break;
         }
     }
@@ -91,11 +93,24 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    const float KNOCKBACK_MULT = 2;
+    const float KNOCKBACK_MULT = 1;
     const float HEAL_MULT = 10;
+    const float SPEEDBOOST_MULT = 1;
+
     void Knockback(EffectContext context)
     {
         transform.position += context.direction * context.strength * KNOCKBACK_MULT;
+    }
+
+    IEnumerator Speedboost(EffectContext context)
+    {
+        agent.speed = movementSpeed * context.strength * SPEEDBOOST_MULT;
+
+        yield return new WaitForSeconds(context.duration);
+
+        agent.speed = movementSpeed;
+
+        yield return 0;
     }
 
     private void OnDrawGizmos()
@@ -119,4 +134,5 @@ public struct EffectContext
     public float strength;
     public float radius;
     public Vector3 point;
+    public float duration;
 }

@@ -113,6 +113,7 @@ public class ShootComponent : MonoBehaviour
             context.strength = 2;
             context.radius = 3;
             context.point = point;
+            context.duration = 4;
 
             switch (effect)
             {
@@ -120,9 +121,10 @@ public class ShootComponent : MonoBehaviour
                     Knockback(context, enemy);
                     break;
                 case EffectType.HEAL:
-                    Heal(context);
+                    ApplyEffect(context);
                     break;
                 case EffectType.SPEEDBOOST:
+                    ApplyEffect(context);
                     break;
             }
             return;
@@ -143,7 +145,7 @@ public class ShootComponent : MonoBehaviour
     }
 
     Vector3 healPoint;
-    void Heal(EffectContext context)
+    void ApplyEffect(EffectContext context)
     {
         healPoint = context.point;
         var colliders = Physics.OverlapSphere(context.point, context.radius);

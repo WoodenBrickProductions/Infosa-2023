@@ -16,7 +16,12 @@ public class MovementTest : MonoBehaviour
 	[SerializeField] private bool horizontalLock = false;
 	[Header("Stats")]
 	[SerializeField] float movementSpeed = 10;
+	private float currentMovementSpeed;
 
+	void Awake()
+    {
+		currentMovementSpeed = movementSpeed;
+    }
 
 	Vector2 rotation = Vector2.zero;
 	const string xAxis = "Mouse X"; //Strings in direct code generate garbage, storing and re-using them creates no garbage

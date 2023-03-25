@@ -12,6 +12,47 @@ public class Bullet : MonoBehaviour
     public EffectType effect;
 
     public float timer;
+
+    private new Renderer renderer;
+
+    private void Awake()
+    {
+        renderer = GetComponent<Renderer>();
+    }
+
+    public void Activate()
+    {
+        gameObject.SetActive(true);
+        enabled = true;
+        transform.parent = null;
+
+        if (!magic)
+        {
+            renderer.material.color = Color.white;
+            return;
+        }
+
+        switch (effect)
+        {
+            case EffectType.KNOCKBACK:
+                renderer.material.color = Color.black;
+                break;
+            case EffectType.HEAL:
+                renderer.material.color = Color.yellow;
+                break;
+            case EffectType.SPEEDBOOST:
+                renderer.material.color = Color.blue;
+                break;
+        }
+    }
+
+    void Deactivate()
+    {
+        enabled = false;
+        gameObject.SetActive(false);
+        transform.parent = pool.transform;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -23,17 +64,15 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        enabled = false;
-        gameObject.SetActive(false);
+        Deactivate();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        enabled = false;
-        Debug.Log("Projectile hit " + other.name);
+        Deactivate();
+        Debug.Log("Projectile hit " + collision.gameObject.name);
 
-        var point = other.ClosestPoint(transform.position);
-        pool.OnHit(other, point, direction, magic, effect);
-        gameObject.SetActive(false);
+        var point = collision.collider.ClosestPoint(transform.position);
+        pool.OnHit(collision.collider, point, direction, magic, effect);
     }
 }
