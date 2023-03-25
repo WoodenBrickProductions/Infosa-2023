@@ -1609,6 +1609,10 @@ PrefabInstance:
       propertyPath: pool
       value: 
       objectReference: {fileID: 1834748544}
+    - target: {fileID: 3029445577049463299, guid: 9d9a89e4643a37241b2748dbbbadd9ff, type: 3}
+      propertyPath: horizontalLock
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

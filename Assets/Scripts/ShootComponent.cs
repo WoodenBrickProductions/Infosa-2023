@@ -9,6 +9,13 @@ public class ShootComponent : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private float fireRate = 4;
     [SerializeField] private float damage = 2;
+    [Tooltip("Randomize how many bullets need to be fired before the next magic bullet")]
+    [SerializeField] private bool randomBulletOrder = true;
+    [Tooltip("Randomize which will be the next magic bullet effect")]
+    [SerializeField] private bool randomBulletType = true;
+
+    [SerializeField] private EffectType effectType;
+
     [SerializeField] private int magicBulletMin = 2;
     [SerializeField] private int magicBulletMax = 4;
     
@@ -24,8 +31,8 @@ public class ShootComponent : MonoBehaviour
 
     private void Awake()
     {
-        magicBullet = Random.Range(magicBulletMin, magicBulletMax);
-        nextEffect = (EffectType) Random.Range(0, effectCount);
+        magicBullet = randomBulletOrder ? Random.Range(magicBulletMin, magicBulletMax) : magicBulletMax;
+        nextEffect = randomBulletType ? (EffectType) Random.Range(0, effectCount) : effectType;
         if(shootMode == ShootMode.PROJECTILE)
         {
             pool.OnHitCallback += OnHit;
@@ -112,8 +119,8 @@ public class ShootComponent : MonoBehaviour
                     break;
             }
 
-            magicBullet = Random.Range(magicBulletMin, magicBulletMax);
-            nextEffect = (EffectType)Random.Range(0, effectCount);
+            magicBullet = randomBulletOrder ? Random.Range(magicBulletMin, magicBulletMax) : magicBulletMax;
+            nextEffect = randomBulletType ? (EffectType)Random.Range(0, effectCount) : effectType;
             return;
         }
 
