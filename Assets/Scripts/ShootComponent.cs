@@ -54,6 +54,8 @@ public class ShootComponent : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             timer = 1.0f / fireRate;
+            magicBullet--;
+
             switch (shootMode)
             {
                 case ShootMode.HITSCAN:
@@ -62,6 +64,12 @@ public class ShootComponent : MonoBehaviour
                 case ShootMode.PROJECTILE:
                     ShootProjectile();
                     break;
+            }
+
+            if(magicBullet == 0)
+            {
+                magicBullet = randomBulletOrder ? Random.Range(magicBulletMin, magicBulletMax) : magicBulletMax;
+                nextEffect = randomBulletType ? (EffectType)Random.Range(0, effectCount) : effectType;
             }
         }
     }
@@ -73,21 +81,20 @@ public class ShootComponent : MonoBehaviour
         if (!Physics.Raycast(ray, out hit))
             return;
 
-        magicBullet--;
-        Hit(hit.point, hit.transform, ray.direction, magicBullet == 0);
+        Hit(hit.point, hit.transform, ray.direction, magicBullet == 0, nextEffect);
     }
 
     public void ShootProjectile()
     {
-        pool.ShootBullet(RotationTarget.Position, RotationTarget.Transform.forward, bulletSpeed);
+        pool.ShootBullet(RotationTarget.Position, RotationTarget.Transform.forward, bulletSpeed, magicBullet == 0, nextEffect);
     }
 
-    private void OnHit(Collider obj, Vector3 point, Vector3 direction)
+    private void OnHit(Collider obj, Vector3 point, Vector3 direction, bool magic, EffectType effect)
     {
-        Hit(point, obj.transform, direction, false);
+        Hit(point, obj.transform, direction, magic, effect);
     }
 
-    private void Hit(Vector3 point, Transform hitTransform, Vector3 direction, bool magic)
+    private void Hit(Vector3 point, Transform hitTransform, Vector3 direction, bool magic, EffectType effect)
     {
         //Debug
         ShootPos = RotationTarget.Position;
@@ -101,13 +108,13 @@ public class ShootComponent : MonoBehaviour
             var context = new EffectContext();
             var dir = direction;
             dir.y = 0;
-            context.type = nextEffect;
-            context.direction = dir;
+            context.type = effect;
+            context.direction = dir.normalized;
             context.strength = 2;
             context.radius = 3;
             context.point = point;
 
-            switch (nextEffect)
+            switch (effect)
             {
                 case EffectType.KNOCKBACK:
                     Knockback(context, enemy);
@@ -118,9 +125,6 @@ public class ShootComponent : MonoBehaviour
                 case EffectType.SPEEDBOOST:
                     break;
             }
-
-            magicBullet = randomBulletOrder ? Random.Range(magicBulletMin, magicBulletMax) : magicBulletMax;
-            nextEffect = randomBulletType ? (EffectType)Random.Range(0, effectCount) : effectType;
             return;
         }
 
@@ -138,14 +142,16 @@ public class ShootComponent : MonoBehaviour
         enemy.ApplyEffect(context);
     }
 
+    Vector3 healPoint;
     void Heal(EffectContext context)
     {
+        healPoint = context.point;
         var colliders = Physics.OverlapSphere(context.point, context.radius);
         foreach(var collider in colliders)
         {
             var enemy = collider.GetComponent<Enemy>();
             if (enemy == null)
-                return;
+                continue;
 
             enemy.ApplyEffect(context);
         }
@@ -157,6 +163,9 @@ public class ShootComponent : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(ShootPos, HitPos);
         Gizmos.DrawSphere(HitPos, 0.1f);
+
+        Gizmos.color = Color.blue;
+        //Gizmos.DrawSphere(healPoint, 3  );
     }
 
     enum ShootMode

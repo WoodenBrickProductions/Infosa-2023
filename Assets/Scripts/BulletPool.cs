@@ -8,9 +8,11 @@ public class BulletPool : MonoBehaviour
     [SerializeField] int startSize;
     [SerializeField] GameObject bulletGO;
     [SerializeField] Bullet[] bullets;
+
+    [SerializeField] float bulletTimer = 10;
     int current;
 
-    public event Action<Collider, Vector3, Vector3> OnHitCallback;
+    public event Action<Collider, Vector3, Vector3, bool, EffectType> OnHitCallback;
 
     private void Awake()
     {
@@ -28,7 +30,7 @@ public class BulletPool : MonoBehaviour
         }
     }
 
-    public void ShootBullet(Vector3 position, Vector3 direction, float speed)
+    public void ShootBullet(Vector3 position, Vector3 direction, float speed, bool magic, EffectType effect)
     {
         var bullet = bullets[current++];
         bullet.index = current - 1;
@@ -37,13 +39,16 @@ public class BulletPool : MonoBehaviour
 
         bullet.direction = direction;
         bullet.speed = speed;
+        bullet.timer = 10;
+        bullet.magic = magic;
+        bullet.effect = effect;
         bullet.transform.position = position;
         bullet.gameObject.SetActive(true);
         bullet.enabled = true;
     }
 
-    public void OnHit(Collider other, Vector3 point, Vector3 direction)
+    public void OnHit(Collider other, Vector3 point, Vector3 direction, bool magic, EffectType effect)
     {
-        OnHitCallback?.Invoke(other, point, direction);
+        OnHitCallback?.Invoke(other, point, direction, magic, effect);
     }
 }

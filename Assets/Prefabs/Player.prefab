@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2122449006118370038}
   - component: {fileID: 3029445577049463299}
   - component: {fileID: 2297433761306787435}
-  m_Layer: 0
+  - component: {fileID: 1307180831214716086}
+  m_Layer: 25
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +35,7 @@ Transform:
   - {fileID: 6482760948819497395}
   - {fileID: 7364159571386814864}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2122449006118370038
 MonoBehaviour:
@@ -62,6 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: 2
   yRotationLimit: 88
+  horizontalLock: 1
   movementSpeed: 10
 --- !u!114 &2297433761306787435
 MonoBehaviour:
@@ -77,11 +79,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 10
   damage: 2
+  randomBulletOrder: 0
+  randomBulletType: 0
+  effectType: 1
   magicBulletMin: 2
   magicBulletMax: 4
   shootMode: 1
   bulletSpeed: 20
   pool: {fileID: 0}
+--- !u!54 &1307180831214716086
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044332058592280514}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 10
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 2
 --- !u!1 &5614883082668517890
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +126,7 @@ GameObject:
   - component: {fileID: 172407641101529990}
   - component: {fileID: 3961691393624873747}
   - component: {fileID: 16855084623522108}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +230,7 @@ GameObject:
   - component: {fileID: 7364159571386814864}
   - component: {fileID: 1818957693542420139}
   - component: {fileID: 3948587531060937068}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}

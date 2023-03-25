@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5734487279183267817}
   - component: {fileID: 8872538686940611469}
   - component: {fileID: 2865893768946173801}
-  m_Layer: 0
+  m_Layer: 26
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6518335434940797035}
   - component: {fileID: 1654854560938965071}
   - component: {fileID: 5781959797141639085}
-  m_Layer: 0
+  m_Layer: 26
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,9 +200,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!1 &7257779971774350661
 GameObject:
@@ -213,7 +213,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1197095256457691634}
-  m_Layer: 0
+  m_Layer: 26
   m_Name: RotationOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
