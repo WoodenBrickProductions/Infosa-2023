@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Bullet : MonoBehaviour
 {
+    [Header("Events")]
+    public UnityEvent OnHit;
+
+    [SerializeField] private VisualEffect hitVisualEffect;
+
     public Vector3 direction;
     public float speed;
     public BulletPool pool;
@@ -69,6 +75,10 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        OnHit.Invoke();
+
+        var hitEffect = Instantiate(hitVisualEffect, transform.position, default, null);
+
         Deactivate();
         Debug.Log("Projectile hit " + collision.gameObject.name);
 

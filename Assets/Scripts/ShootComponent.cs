@@ -2,10 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class ShootComponent : MonoBehaviour
 {
+    [Header("Events")]
+    public UnityEvent OnShoot;
+
     [Header("Stats")]
     [SerializeField] private float fireRate = 4;
     [SerializeField] private float damage = 2;
@@ -87,6 +91,8 @@ public class ShootComponent : MonoBehaviour
     public void ShootProjectile()
     {
         pool.ShootBullet(BulletOrigin.Position, RotationTarget.Transform.forward, bulletSpeed, magicBullet == 0, nextEffect);
+
+        OnShoot.Invoke();
     }
 
     private void OnHit(Collider obj, Vector3 point, Vector3 direction, bool magic, EffectType effect)
