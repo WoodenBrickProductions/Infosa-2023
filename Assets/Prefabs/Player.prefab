@@ -121,7 +121,7 @@ MonoBehaviour:
   magicBulletMax: 1
   shootMode: 1
   bulletSpeed: 15
-  pool: {fileID: 0}
+  pool: {fileID: 8277309839568400870}
   lazerPool: {fileID: 6908148086431970569}
 --- !u!54 &1307180831214716086
 Rigidbody:
