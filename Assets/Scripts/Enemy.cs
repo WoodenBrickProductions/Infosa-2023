@@ -84,18 +84,19 @@ public class Enemy : MonoBehaviour
         SoundSystem.Instance.PlaySound("fx-enemy-hurt", transform);
 
         currentHealth -= amount;
-        if(currentHealth <= 0)
+
+        if (currentHealth > MaxHealth)
+        {
+            currentHealth = MaxHealth;
+        }
+
+        if (currentHealth <= 0)
         {
             Die();
             return;
         }
 
         OnHit?.Invoke();
-
-        if(currentHealth > MaxHealth)
-        {
-            currentHealth = MaxHealth;
-        }
     }
 
     public void ApplyEffect(EffectContext context)

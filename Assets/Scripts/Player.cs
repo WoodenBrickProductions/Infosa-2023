@@ -72,6 +72,11 @@ public class Player : MonoBehaviour
     {
         currentHealth -= amount;
 
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
         HUD.instance.Damaged();
         
         if (currentHealth <= 0)
@@ -83,10 +88,6 @@ public class Player : MonoBehaviour
         
         SoundSystem.Instance.PlaySound("fx-player-damaged");
 
-        if (currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
     }
 
     void Die()

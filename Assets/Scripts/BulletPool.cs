@@ -28,6 +28,8 @@ public class BulletPool : MonoBehaviour
             bullet.pool = this;
             bullets[i] = bullet;
         }
+
+        bulletGO.SetActive(false);
     }
 
     public void ShootBullet(Vector3 position, Vector3 direction, float speed, bool magic, EffectType effect)
@@ -37,13 +39,13 @@ public class BulletPool : MonoBehaviour
         if (current == bullets.Length)
             current = 0;
 
-        bullet.Activate();
         bullet.direction = direction;
         bullet.speed = speed;
         bullet.timer = 10;
         bullet.magic = magic;
         bullet.effect = effect;
         bullet.transform.position = position;
+        bullet.Activate();
     }
 
     public void OnHit(Collider other, Vector3 point, Vector3 direction, bool magic, EffectType effect)
