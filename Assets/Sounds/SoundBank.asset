@@ -48,3 +48,13 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: d8281b2304b0e45488c20e108738f479, type: 3}
     type: 10
+  - name: fx-bullet-impact
+    clips:
+    - {fileID: 8300000, guid: d5201f962db6744b2b5945bd60affb4a, type: 3}
+    type: 10
+  - name: fx-enemy-hurt
+    clips:
+    - {fileID: 8300000, guid: d030025986eb34fa78e6454ec89b414c, type: 3}
+    - {fileID: 8300000, guid: 6b702677130d94a8ebc3540a32778b61, type: 3}
+    - {fileID: 8300000, guid: 23ed91de9c2fa4453bd368dbb6983f51, type: 3}
+    type: 10

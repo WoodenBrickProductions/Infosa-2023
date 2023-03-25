@@ -14,11 +14,21 @@ public class SoundPlayer : MonoBehaviour
         isPlaying = false;
     }
 
-    public void Play(SoundData data)
+    public void Play(SoundData data, Transform playPosition = null)
     {
         this.data = data;
         isPlaying = true;
         source.clip = this.data.GetClip();
+
+        if (playPosition != null)
+        {
+            transform.SetParent(null);
+            transform.position = playPosition.position;
+        }
+        else
+        {
+            transform.SetParent(SoundSystem.Instance.transform);
+        }
         
         if (data.type == SoundData.Type.MusicLayer)
         {
@@ -40,5 +50,7 @@ public class SoundPlayer : MonoBehaviour
         data = null;
         source.clip = null;
         isPlaying = false;
+        
+        transform.SetParent(SoundSystem.Instance.transform);
     }
 }
