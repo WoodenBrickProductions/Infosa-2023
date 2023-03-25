@@ -20,6 +20,12 @@ public class Enemy : MonoBehaviour
     private EffectContext knockbackEffect = new EffectContext();
 
     public event Action OnHit;
+    private EnemySpawner _spawner;
+
+    public void SetSpawner(EnemySpawner spawner)
+    {
+        _spawner = spawner;
+    }
 
     private void Awake()
     {
@@ -97,6 +103,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        _spawner.SendDeath(this);
         enabled = false;
         Destroy(gameObject);
     }
