@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float currentHealth;
 
+    private Coroutine speedBoost;
+
     private void Awake()
     {
         movement = GetComponent<MovementTest>();
@@ -42,7 +44,10 @@ public class Player : MonoBehaviour
                 TakeDamage(-context.strength * HEAL_MULT);
                 break;
             case EffectType.SPEEDBOOST:
-                StartCoroutine(Speedboost(context));
+                if (speedBoost != null)
+                    StopCoroutine(speedBoost);
+
+                speedBoost = StartCoroutine(Speedboost(context));
                 break;
         }
     }

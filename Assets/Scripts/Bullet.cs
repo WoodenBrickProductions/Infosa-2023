@@ -73,6 +73,12 @@ public class Bullet : MonoBehaviour
         Debug.Log("Projectile hit " + collision.gameObject.name);
 
         var point = collision.collider.ClosestPoint(transform.position);
+        
+        if(magic && effect == EffectType.LASER)
+        {
+            direction = collision.GetContact(0).normal;
+        }
+
         pool.OnHit(collision.collider, point, direction, magic, effect);
     }
 }

@@ -126,6 +126,9 @@ public class ShootComponent : MonoBehaviour
                 case EffectType.SPEEDBOOST:
                     ApplyEffect(context);
                     break;
+                case EffectType.LASER:
+                    Laser(context);
+                    break;
             }
             return;
         }
@@ -164,6 +167,13 @@ public class ShootComponent : MonoBehaviour
         }
     }
 
+    private Vector3 TEST_start, TEST_end;
+    void Laser(EffectContext context)
+    {
+        TEST_start = context.point;
+        TEST_end = context.point + context.direction * 5;
+    }
+
     Vector3 HitPos, ShootPos;
     private void OnDrawGizmos()
     {
@@ -173,6 +183,11 @@ public class ShootComponent : MonoBehaviour
 
         Gizmos.color = Color.blue;
         //Gizmos.DrawSphere(healPoint, 3  );
+
+        Gizmos.color = new Color(1, 0, 1);
+        Gizmos.DrawLine(TEST_start, TEST_end);
+        Gizmos.DrawSphere(TEST_start, 0.2f);
+        Gizmos.DrawSphere(TEST_end, 0.2f);
     }
 
     enum ShootMode
@@ -180,4 +195,22 @@ public class ShootComponent : MonoBehaviour
         HITSCAN,
         PROJECTILE
     }
+}
+
+public enum EffectType
+{
+    KNOCKBACK,
+    HEAL,
+    SPEEDBOOST,
+    LASER
+}
+
+public struct EffectContext
+{
+    public EffectType type;
+    public Vector3 direction;
+    public float strength;
+    public float radius;
+    public Vector3 point;
+    public float duration;
 }

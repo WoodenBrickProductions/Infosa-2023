@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183e3ce218948cb48851eec53ed22d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
+  movementSpeed: 1.4
   maxHealth: 100
   currentHealth: 0
 --- !u!114 &2122449006118370038
@@ -98,7 +98,7 @@ MonoBehaviour:
   fireRate: 10
   damage: 2
   randomBulletOrder: 0
-  randomBulletType: 0
+  randomBulletType: 1
   effectType: 1
   magicBulletMin: 2
   magicBulletMax: 4
