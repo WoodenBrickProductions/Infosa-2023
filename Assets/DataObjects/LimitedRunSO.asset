@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f987de1988f94506987ad5b63cb24845, type: 3}
   m_Name: LimitedRunSO
   m_EditorClassIdentifier: 
-  _runLength: 5
+  _runLength: 3
