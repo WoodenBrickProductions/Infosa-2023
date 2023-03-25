@@ -74,13 +74,14 @@ public class Player : MonoBehaviour
 
         HUD.instance.Damaged();
         
-        SoundSystem.Instance.PlaySound("fx-player-damaged");
-
         if (currentHealth <= 0)
         {
+            SoundSystem.Instance.PlaySound("fx-player-dead");
             Die();
             return;
         }
+        
+        SoundSystem.Instance.PlaySound("fx-player-damaged");
 
         if (currentHealth > maxHealth)
         {

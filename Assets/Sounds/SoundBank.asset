@@ -84,3 +84,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 9565a2a3ee36540699d8cf7fe00dee74, type: 3}
     type: 10
     volume: 0.9
+  - name: fx-player-dead
+    clips:
+    - {fileID: 8300000, guid: 9565a2a3ee36540699d8cf7fe00dee74, type: 3}
+    type: 10
+    volume: 0.7
