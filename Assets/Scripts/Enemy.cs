@@ -48,6 +48,8 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.speed = movementSpeed;
         currentHealth = MaxHealth;
+        
+        SoundSystem.Instance.PlaySound("fx-enemy-spawn", transform);
     }
 
     void Update()

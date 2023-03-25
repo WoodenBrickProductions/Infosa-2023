@@ -6,6 +6,7 @@ public class SoundData
     public string name;
     public AudioClip[] clips;
     public Type type;
+    public float volume;
 
     public enum Type
     {

@@ -17,26 +17,31 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: e327ad2e040f9438191be5d81e7ede0a, type: 3}
     type: 0
+    volume: 0.2
   - name: track-chill
     clips:
     - {fileID: 8300000, guid: 134f47b2464224c3391c5b786f195bed, type: 3}
     type: 0
+    volume: 0.25
   - name: fx-stop-action
     clips:
     - {fileID: 8300000, guid: ef13ecbf368124a549dd1fd852321a55, type: 3}
     - {fileID: 8300000, guid: e5d9e0f404e224e5b9a577b970efca45, type: 3}
     type: 10
+    volume: 0.4
   - name: fx-start-action
     clips:
     - {fileID: 8300000, guid: baa237445bd874b7e9d5218fd820b25e, type: 3}
     - {fileID: 8300000, guid: 094eee2cb6b7b4c4293c65056bfa9a02, type: 3}
     type: 10
+    volume: 0.4
   - name: fx-shoot
     clips:
     - {fileID: 8300000, guid: 2f551763d3d104ccd9cd2c587e1b87f6, type: 3}
     - {fileID: 8300000, guid: bb38642a1f0b64f9a8a6bc6f5b4ee5c6, type: 3}
     - {fileID: 8300000, guid: f1806ad6a1f83453a945cac9a0a77db6, type: 3}
     type: 10
+    volume: 1
   - name: fx-enemy-death
     clips:
     - {fileID: 8300000, guid: 780b7d46ea4654dd5af7936ba86f37ae, type: 3}
@@ -44,17 +49,33 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 011956ded6a2149cf87d361915d8698c, type: 3}
     - {fileID: 8300000, guid: c6fe10476754540cf9a6339e2366a6f0, type: 3}
     type: 10
+    volume: 0.8
   - name: fx-impact
     clips:
     - {fileID: 8300000, guid: d8281b2304b0e45488c20e108738f479, type: 3}
     type: 10
+    volume: 0.8
   - name: fx-bullet-impact
     clips:
     - {fileID: 8300000, guid: d5201f962db6744b2b5945bd60affb4a, type: 3}
     type: 10
+    volume: 0.8
   - name: fx-enemy-hurt
     clips:
     - {fileID: 8300000, guid: d030025986eb34fa78e6454ec89b414c, type: 3}
     - {fileID: 8300000, guid: 6b702677130d94a8ebc3540a32778b61, type: 3}
     - {fileID: 8300000, guid: 23ed91de9c2fa4453bd368dbb6983f51, type: 3}
     type: 10
+    volume: 0.8
+  - name: fx-enemy-spawn
+    clips:
+    - {fileID: 8300000, guid: ab472cd04087c4c99a91df76931adcf7, type: 3}
+    - {fileID: 8300000, guid: 9b99b18f89b2f459386d62ebc96c08b1, type: 3}
+    - {fileID: 8300000, guid: 510dfae966c144d51a4ca1107f4dea8f, type: 3}
+    type: 10
+    volume: 0.5
+  - name: fx-spawner
+    clips:
+    - {fileID: 8300000, guid: b2f78bb6d44c04b8d9aa9ee3c720e2d7, type: 3}
+    type: 10
+    volume: 0.6
