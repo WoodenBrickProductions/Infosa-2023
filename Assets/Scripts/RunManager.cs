@@ -50,6 +50,11 @@ public class RunManager : MonoBehaviour
         
         _currentLevel = Instantiate(_levels.GetRandom()).GetComponent<LevelBase>();
         _currentLevel.Initialize(this);
+        
+        SoundSystem.Instance.PlaySound("track-action");
+        SoundSystem.Instance.PlaySound("fx-start-action");
+        SoundSystem.Instance.StopSound("track-chill");
+        
         _onRunStart?.Invoke();
     }
 
@@ -66,6 +71,10 @@ public class RunManager : MonoBehaviour
         _currentLevel.Initialize(this);
         Destroy(lastLevel.gameObject);
 
+        SoundSystem.Instance.PlaySound("track-action");
+        SoundSystem.Instance.PlaySound("fx-start-action");
+        SoundSystem.Instance.StopSound("track-chill");
+        
         _roomCounter++;
         
         // TODO: reset player
@@ -79,6 +88,10 @@ public class RunManager : MonoBehaviour
         // TODO: destroy player
         Destroy(_playerObject);
         Destroy(_currentLevel.gameObject);
+        
+        SoundSystem.Instance.PlaySound("track-chill");
+        SoundSystem.Instance.PlaySound("fx-stop-action");
+        SoundSystem.Instance.StopSound("track-action");
         
         _onRunEnd.Invoke();
     }

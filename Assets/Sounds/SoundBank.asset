@@ -13,9 +13,21 @@ MonoBehaviour:
   m_Name: SoundBank
   m_EditorClassIdentifier: 
   data:
-  - name: 
-    clip: {fileID: 0}
+  - name: track-action
+    clips:
+    - {fileID: 8300000, guid: e327ad2e040f9438191be5d81e7ede0a, type: 3}
     type: 0
-  - name: 
-    clip: {fileID: 0}
+  - name: track-chill
+    clips:
+    - {fileID: 8300000, guid: 134f47b2464224c3391c5b786f195bed, type: 3}
     type: 0
+  - name: fx-stop-action
+    clips:
+    - {fileID: 8300000, guid: ef13ecbf368124a549dd1fd852321a55, type: 3}
+    - {fileID: 8300000, guid: e5d9e0f404e224e5b9a577b970efca45, type: 3}
+    type: 10
+  - name: fx-start-action
+    clips:
+    - {fileID: 8300000, guid: baa237445bd874b7e9d5218fd820b25e, type: 3}
+    - {fileID: 8300000, guid: 094eee2cb6b7b4c4293c65056bfa9a02, type: 3}
+    type: 10

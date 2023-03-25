@@ -26,6 +26,10 @@ public class LevelBase : MonoBehaviour
                 return;
         }
         
+        SoundSystem.Instance.PlaySound("track-chill");
+        SoundSystem.Instance.PlaySound("fx-stop-action");
+        SoundSystem.Instance.StopSound("track-action");
+        
         _levelExitInteractable.EnableInteraction();
     }
 

@@ -8,14 +8,28 @@ public class SoundPlayer : MonoBehaviour
 
     private void Awake()
     {
-        source = gameObject.AddComponent<AudioSource>(); 
+        source = gameObject.AddComponent<AudioSource>();
+        source.playOnAwake = false;
+        source.Stop();
+        isPlaying = false;
     }
+    
 
     public void Play(SoundData data)
     {
         this.data = data;
         isPlaying = true;
-        source.clip = this.data.clip;
+        source.clip = this.data.GetClip();
+
+        if (data.type == SoundData.Type.MusicLayer)
+        {
+            source.loop = true;
+        }
+        else
+        {
+            source.loop = false;
+        }
+        
         source.Play();
     }
 
