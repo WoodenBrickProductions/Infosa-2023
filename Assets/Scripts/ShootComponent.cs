@@ -72,6 +72,8 @@ public class ShootComponent : MonoBehaviour
                     ShootProjectile();
                     break;
             }
+            
+            SoundSystem.Instance.PlaySound("fx-shoot");
 
             if(magicBullet == 0)
             {

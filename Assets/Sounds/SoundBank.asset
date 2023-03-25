@@ -31,3 +31,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: baa237445bd874b7e9d5218fd820b25e, type: 3}
     - {fileID: 8300000, guid: 094eee2cb6b7b4c4293c65056bfa9a02, type: 3}
     type: 10
+  - name: fx-shoot
+    clips:
+    - {fileID: 8300000, guid: 2f551763d3d104ccd9cd2c587e1b87f6, type: 3}
+    - {fileID: 8300000, guid: bb38642a1f0b64f9a8a6bc6f5b4ee5c6, type: 3}
+    - {fileID: 8300000, guid: f1806ad6a1f83453a945cac9a0a77db6, type: 3}
+    type: 10
