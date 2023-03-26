@@ -47,7 +47,7 @@ public class Bullet : MonoBehaviour
             renderer.sprite = magicSprite;
         }
 
-        renderer.color = Color.yellow;
+        //renderer.color = Color.yellow;
 
         //switch (effect)
         //{
