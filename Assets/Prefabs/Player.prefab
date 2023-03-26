@@ -114,6 +114,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   muzzleVisualEffect: {fileID: 1984203039368250888, guid: 9ceb6e5f221cc884bbe7c66d05a0d922, type: 3}
+  effectVisualEffect: {fileID: 3998469904386371291, guid: a1065e01e1a13c54f8c1a8732975f327, type: 3}
   fireRate: 4
   damage: 1
   randomBulletOrder: 0
@@ -957,6 +958,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4833843841865300691, guid: e777de62a0d7ed646afb7477fb6b2fa8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5940906950317039962, guid: e777de62a0d7ed646afb7477fb6b2fa8, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9162512881651610618, guid: e777de62a0d7ed646afb7477fb6b2fa8, type: 3}

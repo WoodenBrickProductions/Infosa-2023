@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,9 @@ public class EnemySpawner : MonoBehaviour
 
     private float _timer = 0.0f;
     private int _maxSpawnCounter = 0;
+
+    [SerializeField] private VisualEffect spawnEffect;
+    [SerializeField] private VisualEffect spawnEffectParticles;
 
     private void Update()
     {
@@ -62,18 +66,27 @@ public class EnemySpawner : MonoBehaviour
     {
         if (CanSpawn() == false)
             return;
-        
-        GameObject spawnedEnemy = Instantiate(_enemiesContainer.GetRandom(), null, true);
-        spawnedEnemy.transform.position = transform.position;
-        
-        _spawnedEnemies.Add(spawnedEnemy);
-        spawnedEnemy.GetComponent<Enemy>().SetSpawner(this);
 
-        onSpawnEvent?.Invoke();
-        
-        SoundSystem.Instance.PlaySound("fx-spawner", transform);
-        
-        _maxSpawnCounter++;
+        var spawnEffectObj = Instantiate(spawnEffect, new Vector3(transform.position.x, 0.1f, transform.position.z), spawnEffect.transform.rotation, null);
+
+        Tween spawnTween = DOVirtual.DelayedCall(1, () => {
+
+            GameObject spawnedEnemy = Instantiate(_enemiesContainer.GetRandom(), null, true);
+            spawnedEnemy.transform.position = transform.position;
+
+            _spawnedEnemies.Add(spawnedEnemy);
+            spawnedEnemy.GetComponent<Enemy>().SetSpawner(this);
+
+            onSpawnEvent?.Invoke();
+
+            SoundSystem.Instance.PlaySound("fx-spawner", transform);
+
+            var spawnEffectparticles = Instantiate(spawnEffectParticles, transform.position, default, null);
+
+            _maxSpawnCounter++;
+
+        }
+        , false).SetTarget(gameObject);
     }
 
     private bool CanSpawn()

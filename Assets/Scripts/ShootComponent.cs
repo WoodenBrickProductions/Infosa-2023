@@ -11,6 +11,7 @@ public class ShootComponent : MonoBehaviour
     public UnityEvent OnShoot;
 
     [SerializeField] private VisualEffect muzzleVisualEffect;
+    [SerializeField] private VisualEffect effectVisualEffect;
 
     [Header("Stats")]
     [SerializeField] private float fireRate = 4;
@@ -189,7 +190,10 @@ public class ShootComponent : MonoBehaviour
 
         effectPool.StartEffect(context.point, context.radius, color);
         var colliders = Physics.OverlapSphere(context.point, context.radius);
-        foreach(var collider in colliders)
+
+        var muzzleEffect = Instantiate(effectVisualEffect, healPoint, default, null);
+
+        foreach (var collider in colliders)
         {
             var enemy = collider.GetComponent<Enemy>();
             if (enemy != null)
