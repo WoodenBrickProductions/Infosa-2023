@@ -224,6 +224,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4619314878271475852, guid: cb8d8a31a2de0407fab4f2d30e0ca2a5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8821176495226014087, guid: cb8d8a31a2de0407fab4f2d30e0ca2a5, type: 3}
       propertyPath: m_Name
       value: Menu
