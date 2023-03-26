@@ -45,7 +45,7 @@ public class RunManager : MonoBehaviour
 
     public void Start()
     {
-        StartRun(_endlessRunData);
+        //StartRun(_endlessRunData);
     }
 
     public void StartRun(RunSO runData)
@@ -97,8 +97,10 @@ public class RunManager : MonoBehaviour
     public void EndRun()
     {
         // TODO: destroy player
-        Destroy(_playerObject);
-        Destroy(_currentLevel.gameObject);
+        if(_playerObject != null)
+            Destroy(_playerObject);
+        if(_currentLevel != null)
+            Destroy(_currentLevel.gameObject);
         
         SoundSystem.Instance.PlaySound("track-chill");
         SoundSystem.Instance.PlaySound("fx-stop-action");

@@ -19,6 +19,12 @@ public class RotationTarget : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        if (instance == this)
+            instance = null;
+    }
+
     public static Vector3 Position
     {
         get

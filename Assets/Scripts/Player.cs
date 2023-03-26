@@ -92,6 +92,7 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        //RunManager.Instance.RestartRun();
+        enabled = false;
+        Fade.instance.FadeOut(1, () => { SceneManager.LoadScene(1); });
     }
 }
