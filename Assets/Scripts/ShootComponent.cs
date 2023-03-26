@@ -107,7 +107,7 @@ public class ShootComponent : MonoBehaviour
 
         var muzzleEffect = Instantiate(muzzleVisualEffect, BulletOrigin.Position, default, null);
 
-        OnShoot.Invoke();
+        OnShoot?.Invoke();
     }
 
     private void OnHit(Collider obj, Vector3 point, Vector3 direction, bool magic, EffectType effect)
