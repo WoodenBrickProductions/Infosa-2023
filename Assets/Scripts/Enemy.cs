@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Shooter")]
     [SerializeField] private bool shooter = false;
-    [SerializeField] private float shootDamage = 1;
+    [SerializeField] private float bulletDamage = 1;
     [SerializeField] private float bulletSpeed = 1;
     [SerializeField] private float fireRate = 1;
     [SerializeField] private BulletPool pool;
@@ -70,11 +70,27 @@ public class Enemy : MonoBehaviour
             return;
 
         pool = EnemyManager.instance.pool;
+        pool.OnHitCallback -= OnPlayerHit;
         pool.OnHitCallback += OnPlayerHit;
     }
 
-    private void OnPlayerHit(Collider arg1, Vector3 arg2, Vector3 arg3, bool arg4, EffectType arg5)
+    private void OnPlayerHit(Collider other, Vector3 point, Vector3 direction, bool magic, EffectType effect)
     {
+        //Debug
+        Debug.Log(point);
+
+        var player = other.transform.GetComponent<Player>();
+
+        if (player != null)
+        {
+            Debug.Log("Hit player");
+        }
+
+        if (player == null)
+            return;
+
+        player.TakeDamage(bulletDamage);
+        player.ApplyEffect(knockbackEffect);
     }
 
     void Update()

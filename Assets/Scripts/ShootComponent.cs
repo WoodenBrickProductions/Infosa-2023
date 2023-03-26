@@ -146,6 +146,7 @@ public class ShootComponent : MonoBehaviour
             switch (effect)
             {
                 case EffectType.KNOCKBACK:
+                    enemy.TakeDamage(damage);
                     ApplyToEnemy(context, enemy);
                     break;
                 case EffectType.HEAL:

@@ -29,6 +29,9 @@ public class RotationTarget : MonoBehaviour
     {
         get
         {
+            if (instance == null)
+                return Vector3.zero;
+
             return instance.transform.position;
         }
     }
