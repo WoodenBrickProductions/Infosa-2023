@@ -1,9 +1,15 @@
+using System;
 using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
     [SerializeField] private Camera _menuCamera;
     [SerializeField] private GameObject _menuLevel;
+
+    private void Start()
+    {
+        SoundSystem.Instance.PlaySound("track-chill");
+    }
 
     public void Show()
     {
