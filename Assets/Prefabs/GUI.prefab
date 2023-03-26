@@ -169,7 +169,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Title
+  m_text: Void Castle
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 23714d9393529854b867495e052e08f0, type: 2}
   m_sharedMaterial: {fileID: 3686426672671250238, guid: 23714d9393529854b867495e052e08f0, type: 2}

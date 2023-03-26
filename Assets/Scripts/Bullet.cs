@@ -71,7 +71,7 @@ public class Bullet : MonoBehaviour
     {
         enabled = false;
         gameObject.SetActive(false);
-        transform.parent = pool.transform;
+        transform.parent = pool?.transform;
     }
 
     // Update is called once per frame

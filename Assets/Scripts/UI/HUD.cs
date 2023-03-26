@@ -71,7 +71,7 @@ public class HUD : MonoBehaviour
     {
         UpdateHealth();
 
-        hpBar.DOPunchPosition(Vector2.down * damagedHealtBarPunchStrenght, damagedHealthBarPunchDuration);
+        //hpBar.DOPunchPosition(Vector2.down * damagedHealtBarPunchStrenght, damagedHealthBarPunchDuration);
         DOVirtual.DelayedCall(dmgFillUpdateDelayTime, () => dmgFill.DOFillAmount(RunManager.Instance._player.currentHealth / RunManager.Instance._player.maxHealth, dmgFillChangeSpeed));
     }
 

@@ -129,7 +129,17 @@ MonoBehaviour:
   effectPool: {fileID: 3680153485510308034}
   magicSprites:
   - type: 0
-    sprite: {fileID: 21300000, guid: 75c47d75ebc32f1499eb115b9686da48, type: 3}
+    sprite: {fileID: 21300000, guid: cc3bd97a2e3e64b418f49f3b6a8c436f, type: 3}
+  - type: 1
+    sprite: {fileID: 21300000, guid: cc3bd97a2e3e64b418f49f3b6a8c436f, type: 3}
+  - type: 2
+    sprite: {fileID: 21300000, guid: cc3bd97a2e3e64b418f49f3b6a8c436f, type: 3}
+  - type: 3
+    sprite: {fileID: 21300000, guid: cc3bd97a2e3e64b418f49f3b6a8c436f, type: 3}
+  - type: 4
+    sprite: {fileID: 21300000, guid: cc3bd97a2e3e64b418f49f3b6a8c436f, type: 3}
+  - type: 4
+    sprite: {fileID: 21300000, guid: cc3bd97a2e3e64b418f49f3b6a8c436f, type: 3}
 --- !u!54 &1307180831214716086
 Rigidbody:
   m_ObjectHideFlags: 0
