@@ -16,6 +16,7 @@ MonoBehaviour:
   - name: track-action
     clips:
     - {fileID: 8300000, guid: e327ad2e040f9438191be5d81e7ede0a, type: 3}
+    - {fileID: 8300000, guid: ad06ad0d836b248e6b8ef66644290bd4, type: 3}
     type: 0
     volume: 0.2
   - name: track-chill
@@ -86,6 +87,6 @@ MonoBehaviour:
     volume: 0.9
   - name: fx-player-dead
     clips:
-    - {fileID: 8300000, guid: 9565a2a3ee36540699d8cf7fe00dee74, type: 3}
+    - {fileID: 8300000, guid: c58cca78cd1fd4d7889f4ceb7d6329d8, type: 3}
     type: 10
     volume: 0.7

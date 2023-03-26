@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 public class SoundSystem : MonoBehaviour
@@ -85,12 +83,17 @@ public class SoundSystem : MonoBehaviour
 
     public void StopSound(string sound)
     {
-        var player = players.Where(player => player.data.name == sound).FirstOrDefault();
+        if (players.Count == 0)
+            return;
+
+        var player = players.Where(player => player.data != null && player.data.name == sound).FirstOrDefault();
 
         if (player != null)
         {
-            player.Stop();
+            Initialize();
         }
+        
+        player?.Stop();
     }
 
     private SoundPlayer GetAvailablePlayer()

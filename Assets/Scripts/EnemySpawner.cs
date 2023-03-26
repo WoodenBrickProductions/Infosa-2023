@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -21,6 +22,16 @@ public class EnemySpawner : MonoBehaviour
     private void Update()
     {
         SpawnTick();
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var enemy in _spawnedEnemies)
+        {
+            Destroy(enemy);
+        }
+
+        _spawnedEnemies.Clear();
     }
 
     private void SpawnTick()

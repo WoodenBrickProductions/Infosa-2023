@@ -1,42 +1,31 @@
+using System;
 using UnityEngine;
 
 public class GUI : MonoBehaviour
 {
-    [SerializeField] private GameObject _mainMenu;
-    [SerializeField] private GameObject _inGameMenu;
+    [SerializeField] private GameObject _menu;
     [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private GameObject _gameOverMenu;
 
-    private void Awake()
+    private void Start()
     {
-        Refresh(GameState.Instance.GetState());
-        GameState.OnStateChange += Refresh;
+        OnGameStateChange(GameState.Type.Menu);
     }
 
-    private void OnDestroy()
+    private void OnEnable()
     {
-        GameState.OnStateChange -= Refresh;
+        GameState.OnStateChange += OnGameStateChange;
     }
 
-    private void Refresh(GameState.Type type)
+    private void OnDisable()
     {
-        switch (type)
-        {
-            case GameState.Type.Menu:
-                EnableScreen(_mainMenu);
-                break;
-            case GameState.Type.InGame:
-                EnableScreen(_inGameMenu);
-                break;
-            case GameState.Type.Paused:
-                EnableScreen(_pauseMenu);
-                break;
-        }
+        GameState.OnStateChange -= OnGameStateChange;
     }
 
-    private void EnableScreen(GameObject screenToEnable)
+    private void OnGameStateChange(GameState.Type obj)
     {
-        _mainMenu.SetActive(_mainMenu == screenToEnable);
-        _pauseMenu.SetActive(_pauseMenu == screenToEnable);
-        _inGameMenu.SetActive(_inGameMenu == screenToEnable);
+        _pauseMenu.SetActive(obj.Equals(GameState.Type.Paused));
+        _menu.SetActive(obj.Equals(GameState.Type.Menu));
+        _gameOverMenu.SetActive(obj.Equals(GameState.Type.GameOver));
     }
 }

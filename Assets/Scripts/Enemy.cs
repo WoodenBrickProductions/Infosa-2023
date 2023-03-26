@@ -14,6 +14,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] float movementSpeed = 3;
     [SerializeField] float collisionDamage = 3;
     [SerializeField] float collisionKnockback = 1;
+
+    [Header("Shooter")]
+    [SerializeField] private bool shooter = false;
+    [SerializeField] private float shootDamage = 1;
+    [SerializeField] private float bulletSpeed = 1;
+    [SerializeField] private float fireRate = 1;
+    [SerializeField] private BulletPool pool;
+    private float timer = 0;
+    public event Action OnShoot;
+
     private NavMeshAgent agent;
 
     [SerializeField] private VisualEffect dieVisualEffect;
@@ -52,10 +62,27 @@ public class Enemy : MonoBehaviour
         SoundSystem.Instance.PlaySound("fx-enemy-spawn", transform);
     }
 
+    private void Start()
+    {
+        if (!shooter)
+            return;
+
+        pool = EnemyManager.instance.pool;
+        pool.OnHitCallback += OnPlayerHit;
+    }
+
+    private void OnPlayerHit(Collider arg1, Vector3 arg2, Vector3 arg3, bool arg4, EffectType arg5)
+    {
+    }
+
     void Update()
     {
         MoveToPlayer();
         Rotate();
+        if(shooter)
+        {
+            Shoot();
+        }
     }
 
     void Rotate()
@@ -78,24 +105,47 @@ public class Enemy : MonoBehaviour
         transform.forward = dir.normalized;
     }
 
+    void Shoot()
+    {
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            return;
+        }
+
+        timer = 1.0f / fireRate;
+
+        var dir = (RotationTarget.Position - transform.position);
+        dir.y = 0;
+        pool.ShootBullet(transform.position + Vector3.up / 2, dir.normalized, bulletSpeed, false, EffectType.NULL);
+
+        // TODO: add shoot effect to enemies
+        //var muzzleEffect = Instantiate(muzzleVisualEffect, BulletOrigin.Position, default, null);
+
+        OnShoot?.Invoke();
+        
+        SoundSystem.Instance.PlaySound("fx-shoot");
+    }
+
     public void TakeDamage(float amount)
     {
         AddFlash(amount * flashFromDamage);
         SoundSystem.Instance.PlaySound("fx-enemy-hurt", transform);
 
         currentHealth -= amount;
-        if(currentHealth <= 0)
+
+        if (currentHealth > MaxHealth)
+        {
+            currentHealth = MaxHealth;
+        }
+
+        if (currentHealth <= 0)
         {
             Die();
             return;
         }
 
         OnHit?.Invoke();
-
-        if(currentHealth > MaxHealth)
-        {
-            currentHealth = MaxHealth;
-        }
     }
 
     public void ApplyEffect(EffectContext context)

@@ -19,11 +19,11 @@ public class Bullet : MonoBehaviour
 
     public float timer;
 
-    private new Renderer renderer;
+    private new SpriteRenderer renderer;
 
     private void Awake()
     {
-        renderer = GetComponent<Renderer>();
+        renderer = GetComponent<SpriteRenderer>();
     }
 
     public void Activate()
@@ -34,11 +34,11 @@ public class Bullet : MonoBehaviour
 
         if (!magic)
         {
-            renderer.material.color = Color.white;
+            renderer.color = Color.white;
             return;
         }
 
-        renderer.material.color = Color.yellow;
+        renderer.color = Color.yellow;
 
         //switch (effect)
         //{

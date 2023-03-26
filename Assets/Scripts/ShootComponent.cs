@@ -30,6 +30,7 @@ public class ShootComponent : MonoBehaviour
     [SerializeField] private float bulletSpeed = 1;
     [SerializeField] private BulletPool pool;
     [SerializeField] private BulletPool lazerPool;
+    [SerializeField] private AOEPool effectPool;
 
     private float timer = 0;
     private int magicBullet;
@@ -107,7 +108,7 @@ public class ShootComponent : MonoBehaviour
 
         var muzzleEffect = Instantiate(muzzleVisualEffect, BulletOrigin.Position, default, null);
 
-        OnShoot.Invoke();
+        OnShoot?.Invoke();
     }
 
     private void OnHit(Collider obj, Vector3 point, Vector3 direction, bool magic, EffectType effect)
@@ -182,6 +183,11 @@ public class ShootComponent : MonoBehaviour
     void ApplyEffect(EffectContext context)
     {
         healPoint = context.point;
+
+        //var color = Effect.GetColor(context.type);
+        var color = Color.yellow;
+
+        effectPool.StartEffect(context.point, context.radius, color);
         var colliders = Physics.OverlapSphere(context.point, context.radius);
         foreach(var collider in colliders)
         {
@@ -262,6 +268,27 @@ public class ShootComponent : MonoBehaviour
     }
     
     const int activeTypeCount = 4;
+}
+
+public static class Effect
+{
+    public static Color GetColor(EffectType type)
+    {
+        switch (type)
+        {
+            case EffectType.KNOCKBACK:
+                return Color.black;
+            case EffectType.HEAL:
+                return Color.yellow;
+            case EffectType.SPEEDBOOST:
+                return Color.blue;
+            case EffectType.LASER:
+            case EffectType.LASER_BOUNCE:
+                return new Color(1, 0, 1);
+            default:
+                return Color.white;
+        }
+    }
 }
 
 public enum EffectType
