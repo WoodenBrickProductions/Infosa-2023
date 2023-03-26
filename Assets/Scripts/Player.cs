@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
 
     private Coroutine speedBoost;
 
+    public bool isDead { private set; get; } = false;
+
     private void Awake()
     {
         movement = GetComponent<MovementTest>();
@@ -92,6 +94,7 @@ public class Player : MonoBehaviour
 
     void Die()
     {
+        isDead = true;
         enabled = false;
         Fade.instance.FadeOut(1, () =>
         {

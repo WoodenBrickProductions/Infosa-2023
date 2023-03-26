@@ -50,6 +50,7 @@ public class RunManager : MonoBehaviour
         _runData = runData;
         _playerObject = Instantiate(_playerPrefab, null);
         _player = _playerObject.GetComponent<Player>();
+        HUD.instance.UpdateHealth();
 
         // TODO: add player interactable
         _roomCounter = 0;

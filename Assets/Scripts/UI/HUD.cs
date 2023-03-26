@@ -75,7 +75,7 @@ public class HUD : MonoBehaviour
         DOVirtual.DelayedCall(dmgFillUpdateDelayTime, () => dmgFill.DOFillAmount(RunManager.Instance._player.currentHealth / RunManager.Instance._player.maxHealth, dmgFillChangeSpeed));
     }
 
-    private void UpdateHealth()
+    public void UpdateHealth()
     {
         float currentHealth = RunManager.Instance._player.currentHealth;
         float maxHealth = RunManager.Instance._player.maxHealth;

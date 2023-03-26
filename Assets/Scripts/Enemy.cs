@@ -39,6 +39,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private SpriteRenderer rend;
     [SerializeField] Color normalOutlineColor = Color.white;
 
+    [SerializeField] private VisualEffect muzzleVisualEffect;
+
     float flash = 0;
 
     Coroutine flashCoroutine;
@@ -120,7 +122,7 @@ public class Enemy : MonoBehaviour
         pool.ShootBullet(transform.position + Vector3.up / 2, dir.normalized, bulletSpeed, false, EffectType.NULL);
 
         // TODO: add shoot effect to enemies
-        //var muzzleEffect = Instantiate(muzzleVisualEffect, BulletOrigin.Position, default, null);
+        var muzzleEffect = Instantiate(muzzleVisualEffect, BulletOrigin.Position, default, null);
 
         OnShoot?.Invoke();
         

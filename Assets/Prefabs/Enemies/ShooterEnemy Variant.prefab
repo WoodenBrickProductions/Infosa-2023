@@ -66,15 +66,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381512490931269620, guid: 36b70e4b8c97a944dabdfbd0bacdd269, type: 3}
       propertyPath: fireRate
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6381512490931269620, guid: 36b70e4b8c97a944dabdfbd0bacdd269, type: 3}
       propertyPath: MaxHealth
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6381512490931269620, guid: 36b70e4b8c97a944dabdfbd0bacdd269, type: 3}
       propertyPath: bulletSpeed
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6381512490931269620, guid: 36b70e4b8c97a944dabdfbd0bacdd269, type: 3}
       propertyPath: shootDamage
@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381512490931269620, guid: 36b70e4b8c97a944dabdfbd0bacdd269, type: 3}
       propertyPath: movementSpeed
-      value: 0.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6381512490931269620, guid: 36b70e4b8c97a944dabdfbd0bacdd269, type: 3}
       propertyPath: collisionDamage
@@ -100,10 +100,22 @@ PrefabInstance:
       propertyPath: flashFromDamage
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6381512490931269620, guid: 36b70e4b8c97a944dabdfbd0bacdd269, type: 3}
+      propertyPath: muzzleVisualEffect
+      value: 
+      objectReference: {fileID: 8391317177341933211, guid: cd6ab74045f07494f9e123b673a92933, type: 3}
+    - target: {fileID: 7352374076117048148, guid: 36b70e4b8c97a944dabdfbd0bacdd269, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1358442261, guid: e59dcc19beecb5a4d88178ad621c67b2, type: 3}
     - target: {fileID: 7352374076117048148, guid: 36b70e4b8c97a944dabdfbd0bacdd269, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1c1ee1db5a8a9b44ea4a45dc69f08949, type: 2}
+    - target: {fileID: 8104637638530653263, guid: 36b70e4b8c97a944dabdfbd0bacdd269, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: aa0b411c69c6bda4abf2f24fe20b42ec, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

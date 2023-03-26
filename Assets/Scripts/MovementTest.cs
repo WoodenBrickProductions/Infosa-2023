@@ -23,14 +23,19 @@ public class MovementTest : MonoBehaviour
 	const string xAxis = "Mouse X"; //Strings in direct code generate garbage, storing and re-using them creates no garbage
 	const string yAxis = "Mouse Y";
 
+    private Player player;
+
     private void Awake()
     {
 		rigidbody = GetComponent<Rigidbody>();
+        player = GetComponent<Player>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player.isDead) return;
+
         int horizontal = (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) ? -1 : 0) +
                  (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) ? 1 : 0) ;
 
