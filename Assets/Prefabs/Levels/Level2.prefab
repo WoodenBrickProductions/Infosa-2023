@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8511332953329663613}
   - component: {fileID: 3692049459176182762}
+  - component: {fileID: 1225711383247045629}
   m_Layer: 0
   m_Name: Level2
   m_TagString: Untagged
@@ -52,6 +53,37 @@ MonoBehaviour:
   - {fileID: 6797168074375489035}
   _levelExitInteractable: {fileID: 5246381603115080663}
   _runManager: {fileID: 0}
+--- !u!114 &1225711383247045629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848947291057597455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.11000001
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
 --- !u!1 &3847462091396924100
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +366,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6856196936871020239, guid: fc8ff5528b69ecd48979e43299db2a33, type: 3}
+      propertyPath: _levelExitInteractable
+      value: 
+      objectReference: {fileID: 5246381603115080663}
+    - target: {fileID: 6856196936871020239, guid: fc8ff5528b69ecd48979e43299db2a33, type: 3}
+      propertyPath: _spawners.Array.data[0]
+      value: 
+      objectReference: {fileID: 6797168074375489035}
     - target: {fileID: 7381928866056498134, guid: fc8ff5528b69ecd48979e43299db2a33, type: 3}
       propertyPath: m_Name
       value: Level2
