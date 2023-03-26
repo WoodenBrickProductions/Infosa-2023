@@ -1,4 +1,3 @@
-using System;
 using Levels;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,8 +12,6 @@ public class RunManager : MonoBehaviour
     [SerializeField] private UnityEvent _onRunStart;
     [SerializeField] private UnityEvent _onNextRoom;
     [SerializeField] private UnityEvent _onRunEnd;
-    
-    
 
     public Player _player { private set; get; }
     private LevelBase _currentLevel;
@@ -43,9 +40,9 @@ public class RunManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void Start()
+    public void StartRun()
     {
-        //StartRun(_endlessRunData);
+        StartRun(_endlessRunData);
     }
 
     public void StartRun(RunSO runData)
@@ -62,9 +59,9 @@ public class RunManager : MonoBehaviour
         
         GameState.Instance.RequestState(GameState.Type.InGame);
         
+        SoundSystem.Instance.StopSound("track-chill");
         SoundSystem.Instance.PlaySound("track-action");
         SoundSystem.Instance.PlaySound("fx-start-action");
-        SoundSystem.Instance.StopSound("track-chill");
         
         _onRunStart?.Invoke();
     }
@@ -81,10 +78,11 @@ public class RunManager : MonoBehaviour
         _currentLevel = Instantiate(_levels.GetRandom()).GetComponent<LevelBase>();
         _currentLevel.Initialize(this);
         Destroy(lastLevel.gameObject);
-
-        SoundSystem.Instance.PlaySound("track-action");
+        
         SoundSystem.Instance.PlaySound("fx-start-action");
+
         SoundSystem.Instance.StopSound("track-chill");
+        SoundSystem.Instance.PlaySound("track-action");
         
         _roomCounter++;
         
@@ -102,9 +100,11 @@ public class RunManager : MonoBehaviour
         if(_currentLevel != null)
             Destroy(_currentLevel.gameObject);
         
-        SoundSystem.Instance.PlaySound("track-chill");
         SoundSystem.Instance.PlaySound("fx-stop-action");
+        
+        SoundSystem.Instance.StopSound("track-chill");
         SoundSystem.Instance.StopSound("track-action");
+        SoundSystem.Instance.PlaySound("track-chill");
         
         _onRunEnd.Invoke();
     }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
@@ -35,6 +37,36 @@ public class HUD : MonoBehaviour
         magicBullet = bullets[3].GetComponent<Image>();
     }
 
+    private void Start()
+    {
+        OnGameStateChange(GameState.Instance.GetState());
+    }
+
+    private void OnEnable()
+    {
+        GameState.OnStateChange += OnGameStateChange;
+    }
+
+    private void OnDisable()
+    {
+        GameState.OnStateChange -= OnGameStateChange;
+    }
+
+    private void OnGameStateChange(GameState.Type obj)
+    {
+        hpBar.gameObject.SetActive(obj.Equals(GameState.Type.InGame));
+        weaponInfo.gameObject.SetActive(obj.Equals(GameState.Type.InGame));
+        
+        if (obj.Equals(GameState.Type.GameOver))
+        {
+            Fade.instance.FadeOut(1, () => { });
+        }
+        else if (obj.Equals(GameState.Type.Menu) || obj.Equals(GameState.Type.InGame))
+        {
+            Fade.instance.FadeIn(10.0f, () => { });
+        }
+    }
+
     public void Damaged()
     {
         UpdateHealth();
@@ -49,7 +81,7 @@ public class HUD : MonoBehaviour
         float maxHealth = RunManager.Instance._player.maxHealth;
 
         hpFill.fillAmount = currentHealth / maxHealth;
-        hpText.text = currentHealth + "/" + maxHealth;
+        hpText.text = Mathf.Clamp(currentHealth, 0, maxHealth) + "/" + maxHealth;
 
         dmgFill.fillAmount = hpFill.fillAmount;
     }

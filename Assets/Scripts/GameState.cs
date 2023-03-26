@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
     private static GameState _instance;
-    private Type _currentState = Type.InGame;
+    [SerializeField] private Type _currentState = Type.Menu;
 
     public static GameState Instance
     {
@@ -30,7 +30,8 @@ public class GameState : MonoBehaviour
     {
         Menu = 0,
         InGame = 1,
-        Paused = 2
+        Paused = 2,
+        GameOver = 3,
     }
 
     public Type GetState()
