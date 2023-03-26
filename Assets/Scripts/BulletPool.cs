@@ -32,12 +32,15 @@ public class BulletPool : MonoBehaviour
         bulletGO.SetActive(false);
     }
 
-    public void ShootBullet(Vector3 position, Vector3 direction, float speed, bool magic, EffectType effect)
+    public void ShootBullet(Vector3 position, Vector3 direction, float speed, bool magic, EffectType effect, Sprite magicSprite = null)
     {
         var bullet = bullets[current++];
         bullet.index = current - 1;
         if (current == bullets.Length)
             current = 0;
+
+        if (magic && magicSprite != null)
+            bullet.magicSprite = magicSprite;
 
         bullet.direction = direction;
         bullet.speed = speed;

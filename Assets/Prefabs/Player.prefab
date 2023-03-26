@@ -127,6 +127,9 @@ MonoBehaviour:
   pool: {fileID: 8277309839568400870}
   lazerPool: {fileID: 6908148086431970569}
   effectPool: {fileID: 3680153485510308034}
+  magicSprites:
+  - type: 0
+    sprite: {fileID: 21300000, guid: 75c47d75ebc32f1499eb115b9686da48, type: 3}
 --- !u!54 &1307180831214716086
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -16,14 +16,17 @@ public class Bullet : MonoBehaviour
     public int index;
     public bool magic;
     public EffectType effect;
+    public Sprite magicSprite = null;
 
     public float timer;
 
     private new SpriteRenderer renderer;
+    private Sprite defaultSprite;
 
     private void Awake()
     {
         renderer = GetComponent<SpriteRenderer>();
+        defaultSprite = renderer.sprite;
     }
 
     public void Activate()
@@ -35,7 +38,13 @@ public class Bullet : MonoBehaviour
         if (!magic)
         {
             renderer.color = Color.white;
+            renderer.sprite = defaultSprite;
             return;
+        }
+
+        if(magicSprite != null)
+        {
+            renderer.sprite = magicSprite;
         }
 
         renderer.color = Color.yellow;

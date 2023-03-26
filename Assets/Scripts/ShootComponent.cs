@@ -32,6 +32,7 @@ public class ShootComponent : MonoBehaviour
     [SerializeField] private BulletPool pool;
     [SerializeField] private BulletPool lazerPool;
     [SerializeField] private AOEPool effectPool;
+    [SerializeField] private EffectSprite[] magicSprites;
 
     private float timer = 0;
     private int magicBullet;
@@ -105,7 +106,7 @@ public class ShootComponent : MonoBehaviour
 
     public void ShootProjectile()
     {
-        pool.ShootBullet(BulletOrigin.Position, RotationTarget.Transform.forward, bulletSpeed, magicBullet == 0, nextEffect);
+        pool.ShootBullet(BulletOrigin.Position, RotationTarget.Transform.forward, bulletSpeed, magicBullet == 0, nextEffect, GetMagicSprite(nextEffect));
 
         var muzzleEffect = Instantiate(muzzleVisualEffect, BulletOrigin.Position, default, null);
 
@@ -146,7 +147,8 @@ public class ShootComponent : MonoBehaviour
             switch (effect)
             {
                 case EffectType.KNOCKBACK:
-                    enemy.TakeDamage(damage);
+                    if(enemy != null)
+                        enemy.TakeDamage(damage);
                     ApplyToEnemy(context, enemy);
                     break;
                 case EffectType.HEAL:
@@ -266,6 +268,17 @@ public class ShootComponent : MonoBehaviour
         }
     }
 
+    Sprite GetMagicSprite(EffectType nextEffect)
+    {
+        foreach(var effectSprite in magicSprites)
+        {
+            if (effectSprite.type == nextEffect)
+                return effectSprite.sprite;
+        }
+
+        return null;
+    }
+
     enum ShootMode
     {
         HITSCAN,
@@ -305,6 +318,13 @@ public enum EffectType
 
     LASER_BOUNCE,
     NULL
+}
+
+[Serializable]
+public struct EffectSprite
+{
+    public EffectType type;
+    public Sprite sprite;
 }
 
 public struct EffectContext
