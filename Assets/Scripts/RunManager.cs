@@ -78,7 +78,8 @@ public class RunManager : MonoBehaviour
         LevelBase lastLevel = _currentLevel;
         _currentLevel = Instantiate(_levels.GetRandom()).GetComponent<LevelBase>();
         _currentLevel.Initialize(this);
-        Destroy(lastLevel.gameObject);
+        if(lastLevel.gameObject != null)
+            Destroy(lastLevel.gameObject);
         
         SoundSystem.Instance.PlaySound("fx-start-action");
 

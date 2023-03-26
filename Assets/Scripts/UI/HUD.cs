@@ -25,6 +25,8 @@ public class HUD : MonoBehaviour
     [SerializeField] private float damagedHealthBarPunchDuration = 0.15f;
     [SerializeField] private float dmgFillUpdateDelayTime = 0.5f;
     [SerializeField] private float dmgFillChangeSpeed = 0.1f;
+    [SerializeField] private EffectSprite[] magicSprites;
+    [SerializeField] private Image magicSprite;
 
     private void Awake()
     {
@@ -96,9 +98,22 @@ public class HUD : MonoBehaviour
                 b.gameObject.SetActive(true);
             }
 
+            magicSprite.sprite = GetMagicSprite(effect);
+
             return;
         }
 
         bullets[3 - magicBullet].gameObject.SetActive(false);
+    }
+
+    Sprite GetMagicSprite(EffectType nextEffect)
+    {
+        foreach (var effectSprite in magicSprites)
+        {
+            if (effectSprite.type == nextEffect)
+                return effectSprite.sprite;
+        }
+
+        return null;
     }
 }
